@@ -1,0 +1,8 @@
+- Pøedem domluveno na èem se bude pracovat
+- Každý rozumí danému tématu
+- Položku lze testovat a zjistit zda funkce funguje podle ocekavani
+- Testovaní výkonu
+- Dokumentace
+- Splnuje kriteria pro "uzivatelske pribehy"
+- "uzivatelsky pribeh" je definovany
+- "uzivatelsky pribeh" akceptuje definovane kriteria
