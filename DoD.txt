@@ -1,4 +1,4 @@
-- navrhnoutá datová struktura
+- navrhnutá datová struktura
 	- jednotlivé DB a vztahy
 	- části systému
 
