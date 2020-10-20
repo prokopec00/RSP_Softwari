@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - navrhnutá datová struktura
 	- jednotlivé DB a vztahy
 	- části systému
@@ -24,3 +25,31 @@
 
 - testy jsou OK
 	- Final release
+=======
+- navrhnutá datová struktura
+	- jednotlivé DB a vztahy
+	- části systému
+
+- napsaný kód
+	- pro DB
+	- implementace systému
+
+- kód je zdokumentovaný
+	- celkové části
+	- jednotlivé funkce
+
+- moduly jsou otestované
+	- fuknce fungují dle předpokladů
+	- krajové stavy (exceptions)
+
+- review je hotový
+	- návrhy na zlepšení
+	- akceptace
+
+- celek je vydaný a otestovaný
+	- otestovaný celek
+	- případná oprava chyb
+
+- testy jsou OK
+	- Final release
+>>>>>>> 88a49927c20bd6df6558f426ba28f5f28a83d39a

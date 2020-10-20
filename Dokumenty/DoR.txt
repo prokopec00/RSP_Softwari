@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - Předem domluveno na čem se bude pracovat
 - Každý rozumí danému tématu
 - Položku lze testovat a zjistit zda funkce funguje podle ocekavani
@@ -6,3 +7,13 @@
 - Splnuje kriteria pro "uzivatelske pribehy"
 - "uzivatelsky pribeh" je definovany
 - "uzivatelsky pribeh" akceptuje definovane kriteria
+=======
+- Předem domluveno na čem se bude pracovat
+- Každý rozumí danému tématu
+- Položku lze testovat a zjistit zda funkce funguje podle ocekavani
+- Testovaní výkonu
+- Dokumentace
+- Splnuje kriteria pro "uzivatelske pribehy"
+- "uzivatelsky pribeh" je definovany
+- "uzivatelsky pribeh" akceptuje definovane kriteria
+>>>>>>> 88a49927c20bd6df6558f426ba28f5f28a83d39a
