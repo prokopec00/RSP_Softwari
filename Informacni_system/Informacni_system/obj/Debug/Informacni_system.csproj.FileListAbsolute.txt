@@ -57,3 +57,5 @@ D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj
 D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj.CopyComplete
 D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll
 D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.pdb
+D:\github\Informacni_system\Informacni_system\bin\FreeTextBox.dll
+D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll.licenses
