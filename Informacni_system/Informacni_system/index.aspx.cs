@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Informacni_system
@@ -14,11 +15,13 @@ namespace Informacni_system
 
     protected void Page_Load(object sender, EventArgs e)
     {
-      //vzor pro pristup k databazi a manipulace s daty
       //gTemplate.DB_ExecuteNonQuery("INSERT INTO test VALUES ('2', 'abcde') ");
+
       //DataTable test = new DataTable();
       //gTemplate.DB_ExecuteTable("SELECT * FROM test", test);
 
     }
+
+
   }
 }
