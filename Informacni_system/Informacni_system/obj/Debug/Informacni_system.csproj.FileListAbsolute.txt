@@ -59,3 +59,16 @@ D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll
 D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.pdb
 D:\github\Informacni_system\Informacni_system\bin\FreeTextBox.dll
 D:\github\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll.licenses
+D:\github\Informacni_system\Informacni_system\bin\MySql.Data.dll
+D:\github\Informacni_system\Informacni_system\bin\Google.Protobuf.dll
+D:\github\Informacni_system\Informacni_system\bin\Zstandard.Net.dll
+D:\github\Informacni_system\Informacni_system\bin\K4os.Compression.LZ4.Streams.dll
+D:\github\Informacni_system\Informacni_system\bin\BouncyCastle.Crypto.dll
+D:\github\Informacni_system\Informacni_system\bin\Ubiety.Dns.Core.dll
+D:\github\Informacni_system\Informacni_system\bin\Renci.SshNet.dll
+D:\github\Informacni_system\Informacni_system\bin\System.Buffers.dll
+D:\github\Informacni_system\Informacni_system\bin\K4os.Compression.LZ4.dll
+D:\github\Informacni_system\Informacni_system\bin\K4os.Hash.xxHash.dll
+D:\github\Informacni_system\Informacni_system\bin\System.Memory.dll
+D:\github\Informacni_system\Informacni_system\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\github\Informacni_system\Informacni_system\bin\MySql.Data.xml

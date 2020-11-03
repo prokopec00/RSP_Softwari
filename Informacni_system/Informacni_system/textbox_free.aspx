@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/predloha.Master" AutoEventWireup="true" CodeBehind="zadani_clanku.aspx.cs" Inherits="Informacni_system.zadani_clanku" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/predloha.Master" AutoEventWireup="true" CodeBehind="textbox_free.aspx.cs" Inherits="Informacni_system.zadani_clanku" %>
 <%@ Register assembly="FreeTextBox" namespace="FreeTextBoxControls" tagprefix="FTB" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

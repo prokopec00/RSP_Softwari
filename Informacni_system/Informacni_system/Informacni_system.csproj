@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FreeTextBox, Version=3.3.1.12354, Culture=neutral, PublicKeyToken=5962a4e684a48b87, processorArchitecture=MSIL">
@@ -48,6 +50,9 @@
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\FreeTextBoxEditor\Framework-4-0\FreeTextBox.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.22.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -71,11 +76,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Add_article.aspx" />
+    <Content Include="show_article.aspx" />
     <Content Include="Web.config" />
     <Content Include="index.aspx" />
-    <Content Include="zadani_clanku.aspx" />
+    <Content Include="textbox_free.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Add_article.aspx.cs">
+      <DependentUpon>Add_article.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_article.aspx.designer.cs">
+      <DependentUpon>Add_article.aspx</DependentUpon>
+    </Compile>
     <Compile Include="predloha.Master.cs">
       <DependentUpon>predloha.Master</DependentUpon>
     </Compile>
@@ -90,12 +104,19 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="zadani_clanku.aspx.cs">
-      <DependentUpon>zadani_clanku.aspx</DependentUpon>
+    <Compile Include="show_article.aspx.cs">
+      <DependentUpon>show_article.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="zadani_clanku.aspx.designer.cs">
-      <DependentUpon>zadani_clanku.aspx</DependentUpon>
+    <Compile Include="show_article.aspx.designer.cs">
+      <DependentUpon>show_article.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="textbox_free.aspx.cs">
+      <DependentUpon>textbox_free.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="textbox_free.aspx.designer.cs">
+      <DependentUpon>textbox_free.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aproved\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
