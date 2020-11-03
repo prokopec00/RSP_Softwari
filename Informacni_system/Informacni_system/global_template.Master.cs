@@ -31,6 +31,7 @@ namespace Informacni_system
       menu_ul_1.DataBind();
 
     }
+
     public void DB_ExecuteNonQuery(string sql)
     {
       MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
@@ -65,8 +66,6 @@ namespace Informacni_system
       sqlAdapter.Fill(table);
       conn.Close();
       return table;
-
-
     }
 
     public void notificationDataBind()
@@ -122,5 +121,37 @@ namespace Informacni_system
       DB_ExecuteNonQuery("UPDATE tbl_notification_link SET seen=1 WHERE ID_notification=" + ID_notification + " AND ID_user=" + ID_user);
       notificationDataBind();
     }
-  }
+
+        /**
+        * Funkce na prihlaseni. 
+        * Kontrola spravneho jmena a hesla.
+        * @author Robert Havranek
+        */
+        protected void loginBtn_Click(object sender, EventArgs e)
+        {
+            //nacteni dat do users
+            DataTable users = new DataTable();
+            DB_ExecuteTable("SELECT * FROM tbl_user WHERE username='" + usernameTB.Text + "' and password='" + passwordTB.Text + "'", users);
+
+            //kontrola spravnosti dat
+            if (users.Rows.Count.ToString() == "1")
+            {
+                //spravne jmeno a heslo
+                DataRow user = users.Rows[0];
+                Session["usern"] = user[0].ToString();
+                Session["role"] = user[5].ToString();
+
+                
+
+                //Response.Redirect("index.aspx");
+                
+            }
+            else
+            {
+                //spatne jmeno nebo heslo
+                //loginErrorMsg.Text = "Špatně zadané uživatelské jméno nebo heslo!";
+            }
+
+        }
+    }
 }

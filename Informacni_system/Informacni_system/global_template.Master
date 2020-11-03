@@ -4,164 +4,197 @@
 
 <html>
 <head runat="server">
-  <link href="Content/bootstrap.min.css" rel="stylesheet">
-  <link href="Content/global.css?version=12" rel="stylesheet">
-  <link href="Css/font-awesome.min.css" rel="stylesheet">
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <link href="Content/global.css?version=13" rel="stylesheet">
+    <link href="Css/font-awesome.min.css" rel="stylesheet">
+    <link href="Css/styles.css" rel="stylesheet">
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
 
-  <script src="Scripts/jquery-3.0.0.min.js"></script>
-
-  <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 
 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title></title>
-  <asp:ContentPlaceHolder ID="head" runat="server">
-  </asp:ContentPlaceHolder>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
-  <form id="form1" runat="server">
-    <div>
-      <nav class="navbar navbar-expand-xl navbar-light bg-light">
-        <a href="#" class="navbar-brand" style="margin-left: 1%">
-          <div class="row">
-            <div style="color: #E8212E; font-size: 1.8rem"><b>LOGOS</b></div>
-            <div style="color: #696969; font-size: 1.8rem">POLYTECHNIKOS</div>
-          </div>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-          <div class="navbar-nav">
-            <a href="#" class="nav-item nav-link">Prohlížet články</a>
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">Historie časopisu</a>
-                <a href="#" class="dropdown-item">Redakční rada</a>
-                <a href="#" class="dropdown-item">Kontakty</a>
+    <form id="mainForm" runat="server">
+        <div>
+            <nav class="navbar navbar-expand-xl navbar-light bg-light">
+                <a href="#" class="navbar-brand" style="margin-left: 1%">
+                    <div class="row">
+                        <div style="color: #E8212E; font-size: 1.8rem"><b>LOGOS</b></div>
+                        <div style="color: #696969; font-size: 1.8rem">POLYTECHNIKOS</div>
+                    </div>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collection of nav links, forms, and other content for toggling -->
+                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+                    <div class="navbar-nav">
+                        <a href="#" class="nav-item nav-link">Prohlížet články</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Historie časopisu</a>
+                                <a href="#" class="dropdown-item">Redakční rada</a>
+                                <a href="#" class="dropdown-item">Kontakty</a>
 
-              </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="navbar-nav ml-auto" id="loginButtons" runat="server">
+
+                        <button type="button" class="btn btn-danger loginRegisterRed" data-toggle="modal" data-target="#signup">Přihlásit</button>
+                        <button type="button" class="btn btn-outline-danger loginRegisterRed" data-toggle="modal" data-target="#signin" style="margin-left: 4px;">Registrovat</button>
+
+
+                    </div>
+                    <div class="navbar-nav ml-auto" visible="false" id="loggedInfo" runat="server">
+                        <div class="dropdown">
+                            <a href="#" class="nav-item nav-link notifications dropdown" data-toggle="dropdown"><i class="fa fa-bell-o fa-10x"></i><span class="badge" id="badge" runat="server"></span></a>
+                            <asp:Repeater ID="menu_ul_1" runat="server">
+                                <HeaderTemplate>
+                                    <ul class="dropdown-menu dropdown-menu_nav" style="width: 400px; left: -150px" id="notifications">
+                                </HeaderTemplate>
+                                <ItemTemplate>
+
+                                    <a href='<%# Eval("redirect")%>' runat="server" style="padding: 0px 0px 0px 0px" onserverclick="markAsRead" name='<%# Eval("id_notification")%>'>
+                                        <li class='<%# "Notification box " + (Eval("seen").ToString().Equals("0") ? "dark" : "light")%>' runat="server" id="test">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12 col-12" style="margin-left: 5%">
+                                                    <div>
+                                                        <%# Eval("Text")%>
+                                                    </div>
+                                                    <small class="text-dark"><%# Eval("date")%></small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </a>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </ul>
+                                </FooterTemplate>
+                            </asp:Repeater>
+
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                                <img src="/Images/profile_empty.png" class="avatar" alt="Avatar">
+                                <b class="caret">Šimon Prokopec</b></a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i>Profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item"><i class="fa fa-sign-out"></i>Odhlásit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <%-- Modalni okna pro login a registraci --%>
+            <div class="modal fade" role="dialog" tabindex="-1" id="signup">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Přihlásit se</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user modalIcon"></i></span></div>
+                                    <%-- <input class="form-control loginForm" type="email" required="" placeholder="Uživatelské jméno">--%>
+                                    <asp:TextBox ID="usernameTB" runat="server" CssClass="form-control loginForm" placeholder="Uživatelské jméno"></asp:TextBox>
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-lock modalIcon"></i></span></div>
+                                    <%-- <input class="form-control" type="password" required="" placeholder="Heslo">--%>
+                                    <asp:TextBox ID="passwordTB" runat="server" CssClass="form-control loginForm" placeholder="Heslo" TextMode="Password"></asp:TextBox>
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <%--<button class="btn btn-primary btn-lg text-white loginModalBtn" style="width: 100%;" type="button">Přihlásit se</button>--%>
+                                <asp:Button ID="loginBtn" runat="server" Text="Přihlásit se" OnClick="loginBtn_Click" CssClass="btn btn-primary btn-lg text-white loginModalBtn" />
+                            </div>
+                            <hr style="background-color: #bababa;">
+                            <%-- autopostback --%>
+                            <p class="text-center">Nemáte účet?&nbsp;&nbsp;<a class="modalLink" data-dismiss="modal" data-toggle="modal" data-target="#signin" href="#">Registrovat se</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-          </div>
-          <div class="navbar-nav ml-auto" id="loginButtons" runat="server">
-
-            <asp:Button runat="server" class="btn redBtn" Text="Přihlásit" OnClick="loginDataBind"/>
-            <asp:Button runat="server" class="btn whiteBtn" Text="Registrovat"/>
-
-          </div>
-          <div class="navbar-nav ml-auto" visible="false" id="loggedInfo" runat="server">
-            <div class="dropdown">
-              <a href="#" class="nav-item nav-link notifications dropdown" data-toggle="dropdown"><i class="fa fa-bell-o fa-10x"></i><span class="badge" id="badge" runat="server"></span></a>
-
-
-
-
-        
-                     <asp:Repeater ID="menu_ul_1" runat="server">
-                       <HeaderTemplate>
-              <ul class="dropdown-menu dropdown-menu_nav" style="width: 400px; left: -150px" id="notifications">
-                  </HeaderTemplate>
-                  <ItemTemplate>
-                  
-                          <a href=<%# Eval("redirect")%> runat="server" style = "padding:0px 0px 0px 0px" onserverclick="markAsRead" Name=<%# Eval("id_notification")%>>
-                    <li class=<%# "Notification box " + (Eval("seen").ToString().Equals("0") ? "dark" : "light")%> runat="server" id="test">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                       <%# Eval("Text")%>
-                      </div>
-                      <small class="text-dark"> <%# Eval("date")%></small>
+            <div class="modal fade" role="dialog" tabindex="-1" id="signin">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Registrovat se</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="text" required="" placeholder="Uživatelské jméno">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="text" required="" placeholder="Jméno">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle-o modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="text" required="" placeholder="Příjmení">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-envelope-o modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="email" required="" placeholder="Email">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-lock modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="password" required="" placeholder="Heslo">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-repeat modalIcon"></i></span></div>
+                                    <input class="form-control loginForm" type="password" required="" placeholder="Zopakovat heslo">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg text-white loginModalBtn" style="width: 100%;" type="button">Registrovat se</button>
+                            </div>
+                            <hr style="background-color: #bababa;">
+                            <p class="text-center">Už máte účet?&nbsp;<a class="modalLink" data-dismiss="modal" data-toggle="modal" data-target="#signup" href="#">Přihlásit se</a></p>
+                        </div>
                     </div>
-                  </div>
-                </li>
-                    </a>
-                  </ItemTemplate>
-                  <FooterTemplate>
-                    </ul>
-                  </FooterTemplate>
-                </asp:Repeater>
-
-
-                <%--      <li class="head text-light bg-dark">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" >
-                      <a href="#" class="float-right text-light">Označit vše jako přečtené</a>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box bg-gray">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>--%>
-
-
-
-
-
-
-          
-     
-
-
-
-
-
-
-
-
-
-
-   
-
+                </div>
             </div>
-            <div class="nav-item dropdown">
-              <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                <img src="/Images/profile_empty.png" class="avatar" alt="Avatar">
-                <b class="caret">Šimon Prokopec</b></a>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i>Profil</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item"><i class="fa fa-sign-out"></i>Odhlásit</a>
-              </div>
-            </div>
-          </div>
+            <asp:Label ID="test" Text="vypis" runat="server"></asp:Label>>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-      </nav>
-      <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-      </asp:ContentPlaceHolder>
-    </div>
-  </form>
+    </form>
 </body>
 </html>
