@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <link href="Content/bootstrap.min.css" rel="stylesheet">
-    <link href="Content/global.css?version=13" rel="stylesheet">
+    <link href="Content/global.css?version=14" rel="stylesheet">
     <link href="Css/font-awesome.min.css" rel="stylesheet">
 
     <script src="Scripts/jquery-3.0.0.min.js"></script>
