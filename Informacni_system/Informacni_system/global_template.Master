@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
   <link href="Content/bootstrap.min.css" rel="stylesheet">
-  <link href="Content/global.css?version=12" rel="stylesheet">
+  <link href="Content/global.css?version=14" rel="stylesheet">
   <link href="Css/font-awesome.min.css" rel="stylesheet">
 
   <script src="Scripts/jquery-3.0.0.min.js"></script>
@@ -34,7 +34,9 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
           <div class="navbar-nav">
-            <a href="#" class="nav-item nav-link">Prohlížet články</a>
+            <a href="show_article.aspx" class="nav-item nav-link">Prohlížet články</a>
+            <a href="addArticle.aspx" class="nav-item nav-link">Přidat článek</a>
+
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
               <div class="dropdown-menu">
@@ -47,120 +49,197 @@
 
           </div>
           <div class="navbar-nav ml-auto" id="loginButtons" runat="server">
-
-            <asp:Button runat="server" class="btn redBtn" Text="Přihlásit" OnClick="loginDataBind"/>
-            <asp:Button runat="server" class="btn whiteBtn" Text="Registrovat"/>
-
+            <button type="button" class="btn btn-danger loginRegisterRed" data-toggle="modal" data-target="#signup">Přihlásit</button>
+            <button type="button" class="btn btn-outline-danger loginRegisterRedOutline" data-toggle="modal" data-target="#signin" style="margin-left: 4px;">Registrovat</button>
           </div>
           <div class="navbar-nav ml-auto" visible="false" id="loggedInfo" runat="server">
             <div class="dropdown">
               <a href="#" class="nav-item nav-link notifications dropdown" data-toggle="dropdown"><i class="fa fa-bell-o fa-10x"></i><span class="badge" id="badge" runat="server"></span></a>
 
+              <asp:Repeater ID="menu_ul_1" runat="server">
+                <HeaderTemplate>
+                  <ul class="dropdown-menu dropdown-menu_nav" style="width: 400px; left: -150px" id="notifications">
+                </HeaderTemplate>
+                <ItemTemplate>
 
-
-
-        
-                     <asp:Repeater ID="menu_ul_1" runat="server">
-                       <HeaderTemplate>
-              <ul class="dropdown-menu dropdown-menu_nav" style="width: 400px; left: -150px" id="notifications">
-                  </HeaderTemplate>
-                  <ItemTemplate>
-                  
-                          <a href=<%# Eval("redirect")%> runat="server" style = "padding:0px 0px 0px 0px" onserverclick="markAsRead" Name=<%# Eval("id_notification")%>>
-                    <li class=<%# "Notification box " + (Eval("seen").ToString().Equals("0") ? "dark" : "light")%> runat="server" id="test">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                       <%# Eval("Text")%>
+                  <a href='<%# Eval("redirect")%>' runat="server" style="padding: 0px 0px 0px 0px" onserverclick="markAsRead" name='<%# Eval("id_notification")%>'>
+                    <li class='<%# "Notification box " + (Eval("seen").ToString().Equals("0") ? "dark" : "light")%>' runat="server" id="test">
+                      <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-12" style="margin-left: 5%">
+                          <div>
+                            <%# Eval("Text")%>
+                          </div>
+                          <small class="text-dark"><%# Eval("date")%></small>
+                        </div>
                       </div>
-                      <small class="text-dark"> <%# Eval("date")%></small>
-                    </div>
-                  </div>
-                </li>
-                    </a>
-                  </ItemTemplate>
-                  <FooterTemplate>
-                    </ul>
-                  </FooterTemplate>
-                </asp:Repeater>
-
-
-                <%--      <li class="head text-light bg-dark">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" >
-                      <a href="#" class="float-right text-light">Označit vše jako přečtené</a>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box bg-gray">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>
-                <li class="notification-box">
-                  <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12" style="margin-left:5%">
-                      <div>
-                        Lorem ipsum dolor sit amet, consectetur
-                           
-                      </div>
-                      <small class="text-dark">27.11.2015, 15:00</small>
-                    </div>
-                  </div>
-                </li>--%>
-
-
-
-
-
-
-          
-     
-
-
-
-
-
-
-
-
-
-
-   
+                    </li>
+                  </a>
+                </ItemTemplate>
+                <FooterTemplate>
+                  </ul>
+                </FooterTemplate>
+              </asp:Repeater>
 
             </div>
             <div class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
                 <img src="/Images/profile_empty.png" class="avatar" alt="Avatar">
-                <b class="caret">Šimon Prokopec</b></a>
+                <b class="caret">
+                  <asp:Label ID="loggedNameSurname" Text="" runat="server"></asp:Label></b></a>
               <div class="dropdown-menu">
-                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i>Profil</a>
+                <a href="profil.aspx" class="dropdown-item"><i class="fa fa-user-o"></i>Profil</a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item"><i class="fa fa-sign-out"></i>Odhlásit</a>
+                <a href="#" class="dropdown-item" runat="server" onserverclick="logOut"><i class="fa fa-sign-out"></i>Odhlásit</a>
+
               </div>
             </div>
           </div>
         </div>
       </nav>
+
+      <%-- Bootsrap alert --%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" id="bootstrapAlert" visible="false" runat="server">
+        <asp:Label ID="alertMsg" Text="" runat="server"></asp:Label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" runat="server">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%-- Modalni okna pro login a registraci --%>
+      <div class="modal fade" role="dialog" tabindex="-1" id="signup">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Přihlásit se</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <asp:Label ID="loginUsernameErr" class="loginErrMsg" runat="server" Visible="false">
+                                        <i class="fa fa-warning"></i> Uživatelské jméno neexistuje.
+              </asp:Label>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user modalIcon"></i></span></div>
+                  <%-- <input class="form-control loginForm" type="email" required="" placeholder="Uživatelské jméno">--%>
+                  <asp:TextBox ID="usernameTB" runat="server" CssClass="form-control loginForm" placeholder="Uživatelské jméno"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+
+              <asp:Label ID="loginPassErr" class="loginErrMsg" runat="server" Visible="false">
+                                        <i class="fa fa-warning"></i> Špatně zadané heslo.
+              </asp:Label>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-lock modalIcon"></i></span></div>
+                  <%-- <input class="form-control" type="password" required="" placeholder="Heslo">--%>
+                  <asp:TextBox ID="passwordTB" runat="server" CssClass="form-control loginForm" placeholder="Heslo" TextMode="Password"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <%--<button class="btn btn-primary btn-lg text-white loginModalBtn" style="width: 100%;" type="button">Přihlásit se</button>--%>
+                <asp:Button ID="loginBtn" runat="server" Text="Přihlásit se" OnClick="loginBtn_Click" CausesValidation="False" CssClass="btn btn-primary btn-lg text-white loginModalBtn" />
+              </div>
+              <hr style="background-color: #bababa;">
+              <%-- autopostback --%>
+              <p class="text-center">Nemáte účet?&nbsp;&nbsp;<a class="modalLink" data-dismiss="modal" data-toggle="modal" data-target="#signin" href="#">Registrovat se</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" role="dialog" tabindex="-1" id="signin">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Registrovat se</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <asp:Label ID="registerGeneralErr" class="loginErrMsg" runat="server" Visible="false" Text="">
+                                         
+              </asp:Label>
+              <asp:Label ID="registerUsernameErr" class="loginErrMsg" runat="server" Visible="false">
+                <i class="fa fa-warning"></i>
+                <asp:Label ID="registerUsernameErrMsg" runat="server"></asp:Label>
+              </asp:Label>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="text" placeholder="Uživatelské jméno">--%>
+                  <asp:TextBox ID="registerUsernameTB" runat="server" CssClass="form-control loginForm" placeholder="Uživatelské jméno"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="text" placeholder="Jméno">--%>
+                  <asp:TextBox ID="registerNameTB" runat="server" CssClass="form-control loginForm" placeholder="Jméno"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle-o modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="text" placeholder="Příjmení">--%>
+                  <asp:TextBox ID="registerSurnameTB" runat="server" CssClass="form-control loginForm" placeholder="Příjmení"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-envelope-o modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="email" placeholder="Email">--%>
+                  <asp:TextBox ID="registerEmailTB" runat="server" CssClass="form-control loginForm" placeholder="Email"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+
+              <asp:Label ID="registerPassErr" class="loginErrMsg" runat="server" Visible="false">
+                <i class="fa fa-warning"></i>
+                <asp:Label ID="registerPassErrMsg" runat="server"></asp:Label>
+              </asp:Label>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-lock modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="password" placeholder="Heslo">--%>
+                  <asp:TextBox ID="registerPass1TB" runat="server" CssClass="form-control loginForm" placeholder="Heslo" TextMode="Password"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-repeat modalIcon"></i></span></div>
+                  <%--<input class="form-control loginForm" type="password" placeholder="Zopakovat heslo">--%>
+                  <asp:TextBox ID="registerPass2TB" runat="server" CssClass="form-control loginForm" placeholder="Zopakovat heslo" TextMode="Password"></asp:TextBox>
+                  <div class="input-group-append"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <%--<button class="btn btn-primary btn-lg text-white loginModalBtn" style="width: 100%;" type="button">Registrovat se</button>--%>
+                <asp:Button ID="registerBtn" runat="server" Text="Registrovat se" OnClick="registerBtn_Click" CausesValidation="False" CssClass="btn btn-primary btn-lg text-white loginModalBtn" />
+              </div>
+              <hr style="background-color: #bababa;">
+              <p class="text-center">Už máte účet?&nbsp;<a class="modalLink" data-dismiss="modal" data-toggle="modal" data-target="#signup" href="#">Přihlásit se</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function showLogin() {
+          $('#signup').modal('show');
+        }
+        function showRegister() {
+          $('#signin').modal('show');
+        }
+      </script>
+
       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
       </asp:ContentPlaceHolder>
+      <asp:Label ID="testLabel" Text="testovaci label" runat="server"></asp:Label>
     </div>
   </form>
 </body>
