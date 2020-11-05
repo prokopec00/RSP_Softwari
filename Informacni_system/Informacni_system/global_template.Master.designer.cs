@@ -22,13 +22,13 @@ namespace Informacni_system {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// ovládací prvek mainForm.
+        /// ovládací prvek form1.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// ovládací prvek loginButtons.
@@ -67,6 +67,42 @@ namespace Informacni_system {
         protected global::System.Web.UI.WebControls.Repeater menu_ul_1;
         
         /// <summary>
+        /// ovládací prvek loggedNameSurname.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loggedNameSurname;
+        
+        /// <summary>
+        /// ovládací prvek bootstrapAlert.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bootstrapAlert;
+        
+        /// <summary>
+        /// ovládací prvek alertMsg.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label alertMsg;
+        
+        /// <summary>
+        /// ovládací prvek loginUsernameErr.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loginUsernameErr;
+        
+        /// <summary>
         /// ovládací prvek usernameTB.
         /// </summary>
         /// <remarks>
@@ -74,6 +110,15 @@ namespace Informacni_system {
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox usernameTB;
+        
+        /// <summary>
+        /// ovládací prvek loginPassErr.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loginPassErr;
         
         /// <summary>
         /// ovládací prvek passwordTB.
@@ -94,13 +139,112 @@ namespace Informacni_system {
         protected global::System.Web.UI.WebControls.Button loginBtn;
         
         /// <summary>
-        /// ovládací prvek test.
+        /// ovládací prvek registerGeneralErr.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label test;
+        protected global::System.Web.UI.WebControls.Label registerGeneralErr;
+        
+        /// <summary>
+        /// ovládací prvek registerUsernameErr.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerUsernameErr;
+        
+        /// <summary>
+        /// ovládací prvek registerUsernameErrMsg.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerUsernameErrMsg;
+        
+        /// <summary>
+        /// ovládací prvek registerUsernameTB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerUsernameTB;
+        
+        /// <summary>
+        /// ovládací prvek registerNameTB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerNameTB;
+        
+        /// <summary>
+        /// ovládací prvek registerSurnameTB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerSurnameTB;
+        
+        /// <summary>
+        /// ovládací prvek registerEmailTB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerEmailTB;
+        
+        /// <summary>
+        /// ovládací prvek registerPassErr.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerPassErr;
+        
+        /// <summary>
+        /// ovládací prvek registerPassErrMsg.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerPassErrMsg;
+        
+        /// <summary>
+        /// ovládací prvek registerPass1TB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerPass1TB;
+        
+        /// <summary>
+        /// ovládací prvek registerPass2TB.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox registerPass2TB;
+        
+        /// <summary>
+        /// ovládací prvek registerBtn.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button registerBtn;
         
         /// <summary>
         /// ovládací prvek ContentPlaceHolder1.
@@ -110,5 +254,14 @@ namespace Informacni_system {
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        
+        /// <summary>
+        /// ovládací prvek testLabel.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label testLabel;
     }
 }
