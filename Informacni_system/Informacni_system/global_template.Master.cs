@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Informacni_system
 {
@@ -26,10 +29,14 @@ namespace Informacni_system
 
             notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
 
-
-
             menu_ul_1.DataSource = notifications;
             menu_ul_1.DataBind();
+
+            //aby profil v menu fungoval spravne na kazde page
+            if (isLogged())
+                hideButtonsProfile(true);
+            else
+                hideButtonsProfile(false);
 
         }
         public void DB_ExecuteNonQuery(string sql)
@@ -138,7 +145,8 @@ namespace Informacni_system
             {
                 loginUsernameErr.Visible = false;
                 DataRow user = users.Rows[0];
-                if (user[6].ToString() == passwordTB.Text)
+                String hashedPass = passHash(passwordTB.Text);
+                if (user[6].ToString() == hashedPass)
                 {
                     loginPassErr.Visible = false;
                     //spravne jmeno a heslo
@@ -150,7 +158,7 @@ namespace Informacni_system
                     Session["role"] = user[5].ToString();
 
                     hideButtonsProfile(true);
-                    showAlertMsg("<strong>Vítejte</strong> " + Session["name"] + " '" + Session["username"] + "' " + Session["surname"], WarningType.Success);
+                    showAlertMsg("<strong>Vítejte</strong> " + Session["name"] + " <strong>'" + Session["username"] + "'</strong> " + Session["surname"] + ".", WarningType.Success);
                     //Response.Redirect("index.aspx");
                 }
                 else
@@ -158,7 +166,7 @@ namespace Informacni_system
                     //spatne heslo
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "showLogin", "showLogin()", true);
                     loginPassErr.Visible = true;
-                    showAlertMsg(" Přihlášení proběhlo <strong>neúspěšně</strong>", WarningType.Danger);
+                    showAlertMsg(" Přihlášení proběhlo <strong>neúspěšně</strong>.", WarningType.Danger);
                 }
             }
             else
@@ -166,7 +174,7 @@ namespace Informacni_system
                 //spatne jmeno
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "showLogin", "showLogin()", true);
                 loginUsernameErr.Visible = true;
-                showAlertMsg(" Přihlášení proběhlo <strong>neúspěšně</strong>", WarningType.Danger);
+                showAlertMsg(" Přihlášení proběhlo <strong>neúspěšně</strong>.", WarningType.Danger);
             }
 
         }
@@ -214,7 +222,8 @@ namespace Informacni_system
             Session.Contents.Remove("name");
             Session.Contents.Remove("email");
             Session.Contents.Remove("role");
-            showAlertMsg("Byli jste úspěšně <strong>odhlášeni</strong> ", WarningType.Info);
+            showAlertMsg("Byli jste úspěšně <strong>odhlášeni</strong>. ", WarningType.Info);
+            Response.Redirect("index.aspx");
         }
 
         /**
@@ -280,8 +289,9 @@ namespace Informacni_system
 
             if (validateRegForm())
             {
-                DB_ExecuteNonQuery("INSERT INTO tbl_user (username, name, surname, email, role, password) VALUES ('" + registerUsernameTB.Text + "','" + registerNameTB.Text + "','" + registerSurnameTB.Text + "','" + registerEmailTB.Text + "', '1' ,'" + registerPass1TB.Text + "')");
-                showAlertMsg("<strong>Registrace proběhla v pořádku.</strong> Nyní se můžete přihlásit", WarningType.Success);
+                String hashedPass = passHash(registerPass1TB.Text);
+                DB_ExecuteNonQuery("INSERT INTO tbl_user (username, name, surname, email, role, password) VALUES ('" + registerUsernameTB.Text + "','" + registerNameTB.Text + "','" + registerSurnameTB.Text + "','" + registerEmailTB.Text + "', '1' ,'" + hashedPass + "')");
+                showAlertMsg("<strong>Registrace proběhla v pořádku.</strong> Nyní se můžete přihlásit.", WarningType.Success);
             }
             else
             {
@@ -290,7 +300,6 @@ namespace Informacni_system
         }
 
         /**
-        * Funkce na registraci. 
         * Kontrola spravne zadanych udaju.
         * @author Robert Havranek
         * @return bool vraci jestli byl registracni formular v poradku
@@ -318,7 +327,11 @@ namespace Informacni_system
                 if (users.Rows.Count.ToString() == "1")
                 {
                     registerUsernameErr.Visible = true;
-                    registerUsernameErrMsg.Text = "Uživatelské jméno již existuje.";
+                    if(registerGeneralErr.Visible == true)
+                        registerUsernameErr.Text = "<br><i class=\"fa fa-warning\"></i> Uživatelské jméno již existuje.";
+                    else
+                        registerUsernameErr.Text = "<i class=\"fa fa-warning\"></i> Uživatelské jméno již existuje.";
+
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "showRegister", "showRegister()", true);
                     flag = false;
                 }
@@ -331,7 +344,7 @@ namespace Informacni_system
                 if (registerPass1TB.Text != registerPass2TB.Text)
                 {
                     registerPassErr.Visible = true;
-                    registerPassErrMsg.Text = "Hesla se musí shodovat.";
+                    registerPassErr.Text = "<i class=\"fa fa-warning\"></i> Hesla se musí shodovat.";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "showRegister", "showRegister()", true);
                     flag = false;
                 }
@@ -339,8 +352,69 @@ namespace Informacni_system
                 {
                     registerPassErr.Visible = false;
                 }
+
+                //kontrola spravnosti emailu
+                if (validateEmail(registerEmailTB.Text))
+                {
+                    registerEmailErr.Visible = false;
+                }
+                else
+                {
+                    registerEmailErr.Visible = true;
+                    registerEmailErr.Text = "<i class=\"fa fa-warning\"></i> Neplatný formát emailu.";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showRegister", "showRegister()", true);
+                    flag = false;
+                }
             }
             return flag;
+        }
+
+        /**
+        * Kontrola spravneho formatu emailu.
+        * @author Robert Havranek
+        * @param email retezec, kteremu se kontroluje spravny format
+        * @return bool vraci jestli byl email v poradku
+        */
+        private bool validateEmail(String email)
+        {
+            string pattern;
+            pattern = @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            Regex rgx = new Regex(pattern);
+            if (rgx.IsMatch(email))
+                return true;
+            else
+                return false;
+        }
+
+        /**
+        * Metoda na hashovani hesla.
+        * @author Robert Havranek
+        * @param password heslo v plain textu
+        * @return string zahashovane heslo
+        */
+        private String passHash(String password)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
+        /**
+        * Metoda na zjisteni, jestli je uzivatel prihlasen
+        * @author Robert Havranek
+        * @return bool je prihlasen
+        */
+        public bool isLogged()
+        {
+            if (Session["userID"] == null)
+                return false;
+            else
+                return true;
         }
     }
 }
