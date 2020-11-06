@@ -32,7 +32,9 @@ namespace Informacni_system
 
     }
 
-    public void DB_ExecuteNonQuery(string sql)
+       
+
+        public void DB_ExecuteNonQuery(string sql)
     {
       MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
       conn_string.Server = "db4free.net";

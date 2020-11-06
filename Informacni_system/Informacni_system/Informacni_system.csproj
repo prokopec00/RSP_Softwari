@@ -68,6 +68,7 @@
     <Reference Include="MySql.Data, Version=8.0.22.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.22\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -118,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="addArticle.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -232,11 +234,20 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="show_article.aspx" />
+    <Content Include="viewArticle.aspx" />
     <Content Include="Web.config" />
     <Content Include="index.aspx" />
     <Content Include="zadani_clanku.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addArticle.aspx.cs">
+      <DependentUpon>addArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="addArticle.aspx.designer.cs">
+      <DependentUpon>addArticle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="global_template.Master.cs">
       <DependentUpon>global_template.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -244,6 +255,7 @@
     <Compile Include="global_template.Master.designer.cs">
       <DependentUpon>global_template.Master</DependentUpon>
     </Compile>
+    <Compile Include="helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -251,6 +263,20 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="show_article.aspx.cs">
+      <DependentUpon>show_article.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="show_article.aspx.designer.cs">
+      <DependentUpon>show_article.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewArticle.aspx.cs">
+      <DependentUpon>viewArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewArticle.aspx.designer.cs">
+      <DependentUpon>viewArticle.aspx</DependentUpon>
     </Compile>
     <Compile Include="zadani_clanku.aspx.cs">
       <DependentUpon>zadani_clanku.aspx</DependentUpon>
@@ -290,6 +316,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aproved\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
