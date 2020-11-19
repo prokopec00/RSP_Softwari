@@ -264,3 +264,27 @@ a.modalLink:hover {
     font-size: 14px;
     margin-bottom: 0px;
 }
+
+.rounded-circle.profileImg {
+    width: 200px;
+    height: 200px;
+    filter: blur(1px);
+    margin: 20px;
+    border: 2px solid rgb(255,0,0);
+}
+
+.col-form-label.profileTable {
+    font-size: 25px;
+}
+
+.col.profileCol {
+    border-left: 3px solid rgba(255,0,0,0.14);
+}
+
+a.dropDownLink:hover {
+    background-color: #ff9999;
+}
+
+a.dropDownLink:focus, a.dropDownLink:active {
+    background-color: #d90000;
+}

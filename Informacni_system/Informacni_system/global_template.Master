@@ -87,9 +87,9 @@
                 <b class="caret">
                   <asp:Label ID="loggedNameSurname" Text="" runat="server"></asp:Label></b></a>
               <div class="dropdown-menu">
-                <a href="profil.aspx" class="dropdown-item"><i class="fa fa-user-o"></i>Profil</a>
+                <a href="profil.aspx" class="dropdown-item dropDownLink"><i class="fa fa-user-o"></i>Profil</a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item" runat="server" onserverclick="logOut"><i class="fa fa-sign-out"></i>Odhlásit</a>
+                <a href="#" class="dropdown-item dropDownLink" runat="server" onserverclick="logOut"><i class="fa fa-sign-out"></i>Odhlásit</a>
 
               </div>
             </div>
@@ -157,13 +157,9 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <asp:Label ID="registerGeneralErr" class="loginErrMsg" runat="server" Visible="false" Text="">
-                                         
-              </asp:Label>
-              <asp:Label ID="registerUsernameErr" class="loginErrMsg" runat="server" Visible="false">
-                <i class="fa fa-warning"></i>
-                <asp:Label ID="registerUsernameErrMsg" runat="server"></asp:Label>
-              </asp:Label>
+
+              <asp:Label ID="registerGeneralErr" class="loginErrMsg" runat="server" Visible="false" Text=""></asp:Label>
+              <asp:Label ID="registerUsernameErr" class="loginErrMsg" runat="server" Visible="false" Text=""></asp:Label>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user modalIcon"></i></span></div>
@@ -172,6 +168,7 @@
                   <div class="input-group-append"></div>
                 </div>
               </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle modalIcon"></i></span></div>
@@ -180,6 +177,7 @@
                   <div class="input-group-append"></div>
                 </div>
               </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-user-circle-o modalIcon"></i></span></div>
@@ -188,6 +186,8 @@
                   <div class="input-group-append"></div>
                 </div>
               </div>
+
+              <asp:Label ID="registerEmailErr" class="loginErrMsg" runat="server" Visible="false" Text=""></asp:Label>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-envelope-o modalIcon"></i></span></div>
@@ -197,10 +197,7 @@
                 </div>
               </div>
 
-              <asp:Label ID="registerPassErr" class="loginErrMsg" runat="server" Visible="false">
-                <i class="fa fa-warning"></i>
-                <asp:Label ID="registerPassErrMsg" runat="server"></asp:Label>
-              </asp:Label>
+              <asp:Label ID="registerPassErr" class="loginErrMsg" runat="server" Visible="false"></asp:Label>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-lock modalIcon"></i></span></div>
@@ -209,6 +206,7 @@
                   <div class="input-group-append"></div>
                 </div>
               </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend"><span class="text-primary input-group-text imgBox"><i class="fa fa-repeat modalIcon"></i></span></div>
@@ -239,7 +237,6 @@
 
       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
       </asp:ContentPlaceHolder>
-      <asp:Label ID="testLabel" Text="testovaci label" runat="server"></asp:Label>
     </div>
   </form>
 </body>
