@@ -288,3 +288,45 @@ a.dropDownLink:hover {
 a.dropDownLink:focus, a.dropDownLink:active {
     background-color: #d90000;
 }
+
+.helpSign {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #f1f1f1;
+    margin: 10px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px -5px #00000070;
+    color: #ff0d0d;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.helpSign i {
+   line-height: 40px;
+   font-size: 28px;
+   transition: 0.4s linear;
+}
+
+.helpSign:hover i {
+    transform: scale(1.2);
+    color: #f1f1f1;
+}
+
+.helpSign::before {
+    content: "";
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    background: #ff1a1a;
+    transform: rotate(45deg);
+    left: -110%;
+    top: 90%;
+}
+
+.helpSign:hover::before {
+    animation: help 0.7s 1;
+    top: -10%;
+    left: -10%;
+}

@@ -234,7 +234,12 @@
           $('#signin').modal('show');
         }
       </script>
-
+      <script type="text/javascript">
+        $(function () {
+            $("[rel='tooltip']").tooltip();
+        });
+    </script>
+      
       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
       </asp:ContentPlaceHolder>
     </div>
