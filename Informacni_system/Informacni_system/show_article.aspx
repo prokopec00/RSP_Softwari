@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/predloha.Master" AutoEventWireup="true" CodeBehind="show_article.aspx.cs" Inherits="Informacni_system.show_article" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/global_template.Master" AutoEventWireup="true" CodeBehind="show_article.aspx.cs" Inherits="Informacni_system.show_article" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
 
-
+    <div>
     <p>
         Soubory nahrané na kontrolu.</p>
     <p>
@@ -16,12 +16,28 @@
                         <asp:CheckBox ID="theCheckBox" runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Název souboru">
+                <asp:TemplateField HeaderText="Název článku">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("filename") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("article") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("filename") %>'></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("article") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Autor">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("author") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("author") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Název souboru">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("filename") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("filename") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField HeaderText="Odkaz souboru" SelectText="Download" ShowSelectButton="True" />
@@ -40,10 +56,33 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Button" />
+        <asp:LinkButton ID="Checked" runat="server" OnClick="Button1_Click1" >Zkontrolováno</asp:LinkButton>
     </p>
-
-
-
-
+        </div>
+    <div>
+        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" OnRowCommand="GridView2_RowCommand">
+            <Columns>
+                <asp:TemplateField HeaderText="Název článku">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("article") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("article") %>'></asp:Label>
+                    </ItemTemplate>
+                    
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Název článku">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("filename") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("filename") %>'></asp:Label>
+                    </ItemTemplate>
+                    
+                </asp:TemplateField>
+                <asp:ButtonField Text="Otevřít" ButtonType="Button" CommandName="openPdf" />
+            </Columns>
+        </asp:GridView>       
+         
+</div>
 </asp:Content>

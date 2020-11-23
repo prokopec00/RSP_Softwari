@@ -11,34 +11,43 @@ namespace Informacni_system
 {
 
 
-    public partial class show_article
+    public partial class zadani_clanku
     {
 
         /// <summary>
-        /// ovládací prvek GridView1.
+        /// ovládací prvek clanek.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.TextBox clanek;
 
         /// <summary>
-        /// ovládací prvek Checked.
+        /// ovládací prvek autor.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Checked;
+        protected global::System.Web.UI.WebControls.TextBox autor;
 
         /// <summary>
-        /// ovládací prvek GridView2.
+        /// ovládací prvek texteditor.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::FreeTextBoxControls.FreeTextBox texteditor;
+
+        /// <summary>
+        /// ovládací prvek odeslat.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button odeslat;
     }
 }

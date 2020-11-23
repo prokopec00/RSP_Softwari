@@ -11,7 +11,7 @@ namespace Informacni_system
 {
 
 
-    public partial class Add_article
+    public partial class addArticle
     {
 
         /// <summary>
@@ -60,13 +60,13 @@ namespace Informacni_system
         protected global::System.Web.UI.WebControls.TextBox clanekJmeno;
 
         /// <summary>
-        /// ovládací prvek btnUpload.
+        /// ovládací prvek Upload.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpload;
+        protected global::System.Web.UI.WebControls.LinkButton Upload;
 
         /// <summary>
         /// ovládací prvek GridView1.
