@@ -47,6 +47,16 @@ namespace Informacni_system
                 GridView1.DataSource = uploaded;
                 GridView1.DataBind();
             }
+            autorJmeno.Text = (string)Session["username"];
+            List<string> magazines = new List<string>();
+            magazines.Add("Sport");
+            magazines.Add("Kultura");
+            magazines.Add("Z domova");
+            magazines.Add("Ze sveta");
+            magazines.Add("Kutilove");
+            magazinList.DataSource = magazines;
+            magazinList.DataBind();
+
         }
 
         
@@ -76,9 +86,6 @@ namespace Informacni_system
 
         protected void Upload_Click(object sender, EventArgs e)
         {
-           
-         
-
             string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
             try
             {

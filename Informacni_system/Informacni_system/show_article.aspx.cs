@@ -45,7 +45,7 @@ namespace Informacni_system
                 }
                 GridView1.DataSource = uploads;
                 GridView1.DataBind();
-            }
+            
             //pokud by se neco zmenilo tak se nove soubory nenactou
                 string[] filePaths_aproved = Directory.GetFiles(Server.MapPath("~/Aproved/"));
                 DataTable aproved = new DataTable();
@@ -73,7 +73,7 @@ namespace Informacni_system
 
                 GridView2.DataSource = aproved;
                 GridView2.DataBind();
-            
+            }
         }
 
             protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

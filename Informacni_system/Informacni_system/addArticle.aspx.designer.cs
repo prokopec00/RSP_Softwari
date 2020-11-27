@@ -60,6 +60,15 @@ namespace Informacni_system
         protected global::System.Web.UI.WebControls.TextBox clanekJmeno;
 
         /// <summary>
+        /// ovládací prvek magazinList.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList magazinList;
+
+        /// <summary>
         /// ovládací prvek Upload.
         /// </summary>
         /// <remarks>
