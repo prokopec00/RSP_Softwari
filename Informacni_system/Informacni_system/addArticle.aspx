@@ -2,13 +2,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:FileUpload ID="FileUpload1" runat="server" accept=" .pdf" /><br />
+    <div style="width:50%;margin: 0 auto;margin-top:5%;">
+    <asp:FileUpload ID="FileUpload1" runat="server" accept=" .pdf" Width="100%" /><br />
     <asp:Label ID="Label1" runat="server" Text="Label">Jmeno autora : </asp:Label>
     <asp:TextBox ID="autorJmeno" runat="server" ></asp:TextBox><br />
     <asp:Label ID="Jmenoclanku" runat="server" Text="Jmeno clanku : "></asp:Label>
-    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox><br />
+    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox>
+        <br />
+      <asp:Label runat="server" Text="Magazín"></asp:Label> <asp:DropDownList ID="magazinList" runat="server"></asp:DropDownList> <br />
     <asp:LinkButton ID="Upload" runat="server" OnClick="Upload_Click">Nahrát ke kontrole</asp:LinkButton>
- <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand">
+<div style="margin-top:5%;">
+    <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
     <Columns>
         <asp:TemplateField HeaderText="Název článku">
             <EditItemTemplate>
@@ -43,7 +47,16 @@
                 <%--delete--%>
           <asp:ButtonField Text="Delete" ButtonType="Button" CommandName="delete" />
     </Columns>
+     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+     <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+     <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+     <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+     <SortedAscendingCellStyle BackColor="#F7F7F7" />
+     <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+     <SortedDescendingCellStyle BackColor="#E5E5E5" />
+     <SortedDescendingHeaderStyle BackColor="#242121" />
 </asp:GridView>
+         </div>   
     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/show_article.aspx">Potvrdit</asp:HyperLink>
-
+        </div>
 </asp:Content>
