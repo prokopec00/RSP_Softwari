@@ -176,3 +176,11 @@ D:\Kraken\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Compre
 D:\Kraken\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Pdf.Base.xml
 D:\Kraken\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.Properties.Resources.resources
 D:\Kraken\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj.GenerateResource.cache
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Compression.Base.dll
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Licensing.dll
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Pdf.Base.dll
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\GroupDocs.Comparison.xml
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Compression.Base.xml
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\bin\Syncfusion.Pdf.Base.xml
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.Properties.Resources.resources
+D:\Skola\VSPJ\5. Semestr\RSP\project\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj.GenerateResource.cache
