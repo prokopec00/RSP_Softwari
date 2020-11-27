@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
   <link href="Content/bootstrap.min.css" rel="stylesheet">
-  <link href="Content/global.css?version=15" rel="stylesheet">
+  <link href="Content/global.css?version=18" rel="stylesheet">
   <link href="Css/font-awesome.min.css" rel="stylesheet">
 
   <script src="Scripts/jquery-3.0.0.min.js"></script>
@@ -36,6 +36,7 @@
           <div class="navbar-nav">
             <a href="show_article.aspx" class="nav-item nav-link">Prohlížet články</a>
             <a href="addArticle.aspx" class="nav-item nav-link">Přidat článek</a>
+            <a href="artDetailRedaktor.aspx" class="nav-item nav-link">Detail článků</a>
 
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>

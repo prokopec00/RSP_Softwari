@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -146,6 +146,10 @@ namespace Informacni_system
                     Response.AddHeader("content-length", FileBuffer.Length.ToString());
                     Response.WriteFile(FileBuffer);
                 }
+            }
+            if(e.CommandName == "openDetail")
+            {
+                //TODO
             }
         }
     }
