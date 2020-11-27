@@ -364,3 +364,46 @@ a.dropDownLink:focus, a.dropDownLink:active {
     font-size: 60px;
     padding-left: 28px;
 }
+
+.fa.fa-check-circle.facheck {
+    font-size: 22px;
+    color: rgb(0,255,0);
+}
+
+.fa.fa-times-circle.fauncheck {
+    font-size: 22px;
+    color: rgb(255,0,0)
+}
+
+.fa.fa-star.fastar {
+    color: rgb(255,214,1);
+    font-size: 22px;
+}
+
+.confirmBtn {
+    background: #1a991a;
+    border-color: #1a991a;
+    width: 100%;
+}
+
+.confirmBtn:hover {
+    color: #fff;
+    background-color: #007000;
+    border-color: #00c700;
+}
+
+.confirmBtn:active {
+    color: #fff;
+    background-color: #00c700;
+    border-color: #66ff66;
+}
+
+.confirmBtn:not(:disabled):not(.disabled).active, .confirmBtn:not(:disabled):not(.disabled):active, .show > .confirmBtn.dropdown-toggle {
+    color: #fff;
+    background-color: #00c700;
+    border-color: #66ff66;
+}
+
+    .confirmBtn:not(:disabled):not(.disabled).active:focus, .confirmBtn:not(:disabled):not(.disabled):active:focus, .show > .confirmBtn.dropdown-toggle:focus {
+        box-shadow: 0 0 0 .2rem rgba(38,255,38,0.5);
+    }

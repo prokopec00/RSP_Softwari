@@ -86,7 +86,7 @@
 <ControlStyle CssClass="btn btn-block" ForeColor="Black"></ControlStyle>
 <FooterStyle BackColor="White" BorderStyle="Solid"></FooterStyle>
                 </asp:ButtonField>
-                <asp:ButtonField Text="Detail" ControlStyle-CssClass="btn btn-block" ControlStyle-ForeColor="Black" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid">
+                <asp:ButtonField Text="Detail" CommandName="openDetail" ControlStyle-CssClass="btn btn-block" ControlStyle-ForeColor="Black" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid">
 <ControlStyle CssClass="btn btn-block" ForeColor="Black"></ControlStyle>
 
 <FooterStyle BackColor="White" BorderStyle="Solid"></FooterStyle>
