@@ -32,13 +32,16 @@ namespace Informacni_system
             menu_ul_1.DataSource = notifications;
             menu_ul_1.DataBind();
 
+            //inicializace avataru
+            avatarInit();
+
             //aby profil v menu fungoval spravne na kazde page
             if (isLogged())
                 hideButtonsProfile(true);
             else
                 hideButtonsProfile(false);
-
         }
+
         public void DB_ExecuteNonQuery(string sql)
         {
             MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
@@ -239,13 +242,14 @@ namespace Informacni_system
         }
 
         /**
-        * Funkce pro skryti login/profilovych tlacitek/funkci
+        * Funkce pro alerty
         * @author Robert Havranek
         * @param msg zprava, ktera se zobrazuje v alertu
         * @param type typ alertu | Success - zelena | Info - Modra | Warning - Zluta | Danger - Cervena
         */
         public void showAlertMsg(String msg, WarningType type)
         {
+
             bootstrapAlert.Visible = true;
             switch (type)
             {
@@ -327,7 +331,7 @@ namespace Informacni_system
                 if (users.Rows.Count.ToString() == "1")
                 {
                     registerUsernameErr.Visible = true;
-                    if(registerGeneralErr.Visible == true)
+                    if (registerGeneralErr.Visible == true)
                         registerUsernameErr.Text = "<br><i class=\"fa fa-warning\"></i> Uživatelské jméno již existuje.";
                     else
                         registerUsernameErr.Text = "<i class=\"fa fa-warning\"></i> Uživatelské jméno již existuje.";
@@ -375,7 +379,7 @@ namespace Informacni_system
         * @param email retezec, kteremu se kontroluje spravny format
         * @return bool vraci jestli byl email v poradku
         */
-        private bool validateEmail(String email)
+        public bool validateEmail(String email)
         {
             string pattern;
             pattern = @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
@@ -392,7 +396,7 @@ namespace Informacni_system
         * @param password heslo v plain textu
         * @return string zahashovane heslo
         */
-        private String passHash(String password)
+        public String passHash(String password)
         {
             var crypt = new System.Security.Cryptography.SHA256Managed();
             var hash = new System.Text.StringBuilder();
@@ -415,6 +419,30 @@ namespace Informacni_system
                 return false;
             else
                 return true;
+        }
+
+        /**
+        * Metoda na inicializaci avataru
+        * @author Robert Havranek
+        */
+        protected void avatarInit()
+        {
+            if(Session["userID"]!= null)
+            {
+                string avatarsFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\";
+                if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".jpg"))
+                {
+                    profileAvatarSmall.ImageUrl = @"Uploads\Avatars\" + Session["userID"].ToString() + ".jpg";
+                }
+                else if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".png"))
+                {
+                    profileAvatarSmall.ImageUrl = @"Uploads\Avatars\" + Session["userID"].ToString() + ".png";
+                }
+                else
+                {
+                    profileAvatarSmall.ImageUrl = "/Images/profile_empty.png";
+                }
+            }
         }
     }
 }

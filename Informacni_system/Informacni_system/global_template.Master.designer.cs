@@ -67,6 +67,15 @@ namespace Informacni_system {
         protected global::System.Web.UI.WebControls.Repeater menu_ul_1;
         
         /// <summary>
+        /// ovládací prvek profileAvatarSmall.
+        /// </summary>
+        /// <remarks>
+        /// Automaticky generované pole.
+        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image profileAvatarSmall;
+        
+        /// <summary>
         /// ovládací prvek loggedNameSurname.
         /// </summary>
         /// <remarks>
