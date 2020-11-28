@@ -18,6 +18,10 @@ namespace Informacni_system
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+
+
             int ID_user = 1;
 
             DataTable notifications = new DataTable();
@@ -29,7 +33,15 @@ namespace Informacni_system
 
             notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
 
-            menu_ul_1.DataSource = notifications;
+            //DataTable test = new DataTable();
+            //DB_ExecuteTable("SELECT * FROM tbl_user", test);
+            //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panrecenzent','pan','recenzent','recenzent@abc.gg',2,'"+passHash("recenzent")+"')");
+            //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panirecenzentova','pani','recenzentova','recenzent@abc.gg',2,'" + passHash("recenzentova") + "')");
+
+
+
+
+      menu_ul_1.DataSource = notifications;
             menu_ul_1.DataBind();
 
             //inicializace avataru
