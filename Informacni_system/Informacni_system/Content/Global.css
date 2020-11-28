@@ -407,3 +407,10 @@ a.dropDownLink:focus, a.dropDownLink:active {
     .confirmBtn:not(:disabled):not(.disabled).active:focus, .confirmBtn:not(:disabled):not(.disabled):active:focus, .show > .confirmBtn.dropdown-toggle:focus {
         box-shadow: 0 0 0 .2rem rgba(38,255,38,0.5);
     }
+
+.indexText {
+  margin-top: 10%;
+  font-size: 30px;
+  font-weight: bold;
+  display: block;
+}

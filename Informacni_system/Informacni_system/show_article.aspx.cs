@@ -23,12 +23,14 @@ namespace Informacni_system
 
 
 
-      //DataTable query = new DataTable();
-      //global_template gt = new global_template();
-      //gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state=3 WHERE id_article=10");
+      DataTable query = new DataTable();
+      global_template gt = new global_template();
+      //gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state=1 WHERE id_article=10");
       //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN state SET DEFAULT 1");
       //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN magazine SET DEFAULT 1");
-      //gt.DB_ExecuteTable("SELECT * FROM tbl_article", query);
+      //gt.DB_ExecuteTable("SELECT * FROM tbl_review2", query);
+      gt.DB_ExecuteTable("SELECT * FROM tbl_review_list", query);
+
 
 
 
@@ -172,7 +174,10 @@ namespace Informacni_system
       authorClankuLb.Text = autorClanku;
       stateChanger(stateClanku);
 
-
+      if (stateClanku != 1)
+      {
+        divCheckMagazineTheme.Visible = false;
+      }
       if (stateClanku != 3)
       {
         divRecenzentAssigning.Visible = false;
@@ -444,6 +449,10 @@ namespace Informacni_system
       var button = (System.Web.UI.WebControls.Button)sender;
       int id = Int32.Parse(button.Attributes["Value"]);
 
+      hfArticleID.Value = id.ToString();
+
+
+
       detailInit(id);
 
       pnlArticleOverview.Visible = false;
@@ -473,6 +482,31 @@ namespace Informacni_system
 
       gv_ArticleOverview.DataSource = complete;
       gv_ArticleOverview.DataBind();
+    }
+
+
+    protected void btnThemeChecks_click(object sender, EventArgs e)
+    {
+
+      global_template gT = new global_template();
+
+      gT.DB_ExecuteNonQuery("UPDATE tbl_article SET state=3 WHERE id_article=" + int.Parse(hfArticleID.Value));
+      detailInit(int.Parse(hfArticleID.Value));
+
+
+      articleDataBind();
+    }
+
+    protected void btnThemeIncorrect_click(object sender, EventArgs e)
+    {
+
+      global_template gT = new global_template();
+
+      gT.DB_ExecuteNonQuery("UPDATE tbl_article SET state=2 WHERE id_article="+int.Parse(hfArticleID.Value));
+      detailInit(int.Parse(hfArticleID.Value));
+
+
+      articleDataBind();
     }
   }
 }

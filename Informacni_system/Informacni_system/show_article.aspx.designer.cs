@@ -204,6 +204,51 @@ namespace Informacni_system
     protected global::System.Web.UI.WebControls.DropDownList ddlRecenzenti2;
 
     /// <summary>
+    /// divCheckMagazineTheme control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCheckMagazineTheme;
+
+    /// <summary>
+    /// Div2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
+
+    /// <summary>
+    /// btnThemeChecks control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnThemeChecks;
+
+    /// <summary>
+    /// Div3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div3;
+
+    /// <summary>
+    /// btnThemeIncorrect control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnThemeIncorrect;
+
+    /// <summary>
     /// recenzeDiv1 control.
     /// </summary>
     /// <remarks>

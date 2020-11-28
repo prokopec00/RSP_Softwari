@@ -22,30 +22,32 @@ namespace Informacni_system
 
 
 
-            int ID_user = 1;
+      //int ID_user = 1;
 
-            DataTable notifications = new DataTable();
-            DataTable notifications_notSeen = new DataTable();
+      //DataTable notifications = new DataTable();
+      //DataTable notifications_notSeen = new DataTable();
 
-            notifications_notSeen = DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + ID_user, notifications_notSeen);
-            int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
-            badge.InnerText = notSeenCount.ToString();
+      //notifications_notSeen = DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + ID_user, notifications_notSeen);
+      //int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
+      //badge.InnerText = notSeenCount.ToString();
 
-            notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
+      //notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
 
-            //DataTable test = new DataTable();
-            //DB_ExecuteTable("SELECT * FROM tbl_user", test);
-            //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panrecenzent','pan','recenzent','recenzent@abc.gg',2,'"+passHash("recenzent")+"')");
-            //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panirecenzentova','pani','recenzentova','recenzent@abc.gg',2,'" + passHash("recenzentova") + "')");
+      DataTable test = new DataTable();
+      //DB_ExecuteTable("SELECT * FROM tbl_article", test);
+      DB_ExecuteTable("SELECT * FROM tbl_states", test);
+
+      //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panrecenzent','pan','recenzent','recenzent@abc.gg',2,'"+passHash("recenzent")+"')");
+      //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panirecenzentova','pani','recenzentova','recenzent@abc.gg',2,'" + passHash("recenzentova") + "')");
+
+      string br = "";
 
 
+      //menu_ul_1.DataSource = notifications;
+      //      menu_ul_1.DataBind();
 
-
-      menu_ul_1.DataSource = notifications;
-            menu_ul_1.DataBind();
-
-            //inicializace avataru
-            avatarInit();
+      //inicializace avataru
+      avatarInit();
 
             //aby profil v menu fungoval spravne na kazde page
             if (isLogged())
