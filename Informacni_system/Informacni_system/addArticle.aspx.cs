@@ -127,18 +127,50 @@ namespace Informacni_system
         protected void uploadBtn_Click(object sender, EventArgs e)
         {
             string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-            
-            try
+            if (clanekJmeno.Text == "")
             {
-                int id_magazine = tbl.Rows[0].Field<int>(magazinList.SelectedIndex);
-                string task1 = "Insert into tbl_article(name_article,name_author,filename,magazine) values('" + clanekJmeno.Text + "','" + autorJmeno.Text + "','" + fileName + "','" + id_magazine + "')";
-                gT.DB_ExecuteNonQuery(task1);
-                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Aproved/") + fileName);
-                Response.Redirect(Request.Url.AbsoluteUri);
+                Response.Write("<script>alert('Vyplňte název článku.');</script>");
+
             }
-            catch (System.IO.IOException)
+            else
             {
-                Response.Write("<script>alert('Vyberte soubor.');</script>");
+                if (autorJmeno.Text == "")
+                {
+                    Response.Write("<script>alert('Vyplňte jméno uživatele.');</script>");
+
+                }
+                else
+                {
+                    try
+                    {
+                        int id_magazine = tbl.Rows[0].Field<int>(magazinList.SelectedIndex);
+                        string task1 = "Insert into tbl_article(name_article,name_author,filename,magazine) values('" + clanekJmeno.Text + "','" + autorJmeno.Text + "','" + fileName + "','" + id_magazine + "')";
+                        gT.DB_ExecuteNonQuery(task1);
+                        FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Aproved/") + fileName);
+                        Response.Redirect(Request.Url.AbsoluteUri);
+                    }
+                    catch (System.IO.IOException)
+                    {
+                        Response.Write("<script>alert('Vyberte soubor.');</script>");
+                    }
+                }
+            }
+        }
+
+        protected void GridView1_DataBound(object sender, EventArgs e)
+        {
+            if (Session["name"] != null)
+            {
+                foreach (GridViewRow rw in GridView1.Rows)
+                {
+                    Label lb = (Label)rw.FindControl("Label2");
+                    string jmeno = lb.Text;
+
+                    if ((string)Session["username"] != jmeno)
+                    {
+                        rw.Visible = false;
+                    }
+                }
             }
         }
     }

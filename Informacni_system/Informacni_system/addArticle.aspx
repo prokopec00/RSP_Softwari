@@ -1,8 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/global_template.Master" AutoEventWireup="true" CodeBehind="addArticle.aspx.cs" Inherits="Informacni_system.addArticle" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            width: 152px;
+        .auto-style2 {
+            width: 44%;
+            height: 29px;
+        }
+        .auto-style3 {
+            height: 29px;
+        }
+        .auto-style4 {
+            width: 44%
         }
     </style>
 </asp:Content>
@@ -18,20 +25,20 @@
 </thead>
 <tbody>
   <tr>
-    <td class="auto-style1">
-    <asp:Label ID="Label1" runat="server" Text="Label">Jmeno autora : </asp:Label>
+    <td class="auto-style4">
+    <asp:Label ID="Label1" runat="server" Text="Label">Jméno autora : </asp:Label>
     </td>
     <td class="tg-0pky">    <asp:TextBox ID="autorJmeno" runat="server" ></asp:TextBox><br />
 </td>
   </tr>
   <tr>
-    <td class="auto-style1">    <asp:Label ID="Jmenoclanku" runat="server" Text="Jmeno clanku : "></asp:Label>
+    <td class="auto-style2">    <asp:Label ID="Jmenoclanku" runat="server" Text="Jméno clanku : "></asp:Label>
 </td>
-    <td class="tg-0pky">    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox>
+    <td class="auto-style3">    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox>
 </td>
   </tr>
   <tr>
-    <td class="auto-style1">      <asp:Label runat="server" Text="Magazín"> <br /></asp:Label> 
+    <td class="auto-style4">      <asp:Label runat="server" Text="Magazín"> <br /></asp:Label> 
 </td>
     <td class="tg-0pky">    <asp:DropDownList Width="100%" ID="magazinList" runat="server"></asp:DropDownList>
 </td>
@@ -41,7 +48,7 @@
         <asp:Button ID="uploadBtn" runat="server" Text="Nahrá ke kontrole" OnClick="uploadBtn_Click" />
         <br />
 <div style="margin-top:5%;">
-    <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
+    <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnDataBound="GridView1_DataBound">
     <Columns>
         <asp:TemplateField HeaderText="Název článku">
             <EditItemTemplate>

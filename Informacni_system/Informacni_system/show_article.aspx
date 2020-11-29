@@ -134,9 +134,9 @@
             <ItemTemplate>
               <asp:Button runat="server" ID="btnOpen" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("filename")%>' OnClick="btnOpen_Click" Text="Otevřít" />
             </ItemTemplate>
-                <ItemStyle CssClass="detail btn btn-block" />
+                <ItemStyle CssClass="detail" />
           </asp:TemplateField>
-          <asp:TemplateField ItemStyle-CssClass="detail" >
+          <asp:TemplateField ItemStyle-CssClass="detail"  >
             <ItemTemplate>
               <asp:Button runat="server" ID="btnDelete" CssClass="btn btn-default" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid" ControlStyle-BackColor="White" Style="width: 100%" Value='<%#Eval("id_article")%>' OnClick="btnDelete_Click" OnClientClick="return confirm('Opravdu chcete odstranit článek?');" Text="Odstranit" />
             </ItemTemplate>
@@ -149,24 +149,9 @@
               <ItemStyle CssClass="detail" />
           </asp:TemplateField>
         </Columns>
-
-
-
-
-
-          <HeaderStyle BackColor="#E8212E" ForeColor="White" Height="80%" HorizontalAlign="Center" />
-
-
-
-
-
+         <HeaderStyle BackColor="#E8212E" ForeColor="White" Height="80%" HorizontalAlign="Center" />
           <RowStyle VerticalAlign="Middle" />
           <SelectedRowStyle VerticalAlign="Middle" />
-
-
-
-
-
       </asp:GridView>
     </div>
   </asp:Panel>

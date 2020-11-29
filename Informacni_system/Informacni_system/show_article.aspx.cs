@@ -22,8 +22,7 @@ namespace Informacni_system
 
 
 
-
-      DataTable query = new DataTable();
+            DataTable query = new DataTable();
       global_template gt = new global_template();
       //gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state=1 WHERE id_article=10");
       //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN state SET DEFAULT 1");
@@ -458,13 +457,13 @@ namespace Informacni_system
 
       global_template gT = new global_template();
       DataTable complete = new DataTable();
-
-      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+            gv_ArticleOverview.Columns[7].Visible = false;
+            gv_ArticleOverview.Columns[2].Visible = false;
             gv_ArticleOverview.Columns[6].Visible = false;
 
-            if (Session["role"] !=null) {
-                gv_ArticleOverview.Columns[6].Visible = true;
-            }
+            gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+
+           
             
       gv_ArticleOverview.DataSource = complete;
       gv_ArticleOverview.DataBind();
@@ -559,6 +558,19 @@ namespace Informacni_system
                     }
                 }
             }
+            if (Session["role"] != null)
+            {
+                if (int.Parse((string)Session["role"]) > 1)
+                {
+                    gv_ArticleOverview.Columns[7].Visible = true;
+                }
+                gv_ArticleOverview.Columns[2].Visible = true;
+                if (int.Parse((string) Session["role"]) >2)
+                {
+                    gv_ArticleOverview.Columns[6].Visible = true;
+                }
+            }
+
         }
 
         protected void gv_ArticleOverview_SelectedIndexChanged(object sender, EventArgs e)
