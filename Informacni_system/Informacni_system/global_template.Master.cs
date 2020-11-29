@@ -24,14 +24,12 @@ namespace Informacni_system
 
       //int ID_user = 1;
 
-      //DataTable notifications = new DataTable();
-      //DataTable notifications_notSeen = new DataTable();
 
-      //notifications_notSeen = DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + ID_user, notifications_notSeen);
-      //int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
-      //badge.InnerText = notSeenCount.ToString();
 
-      //notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
+      //notifications_notSeen = 
+    
+
+      //
 
       DataTable test = new DataTable();
       //DB_ExecuteTable("SELECT * FROM tbl_article", test);
@@ -45,8 +43,6 @@ namespace Informacni_system
       string br = "";
 
 
-      //menu_ul_1.DataSource = notifications;
-      //      menu_ul_1.DataBind();
 
       //inicializace avataru
       avatarInit();
@@ -54,6 +50,7 @@ namespace Informacni_system
       //aby profil v menu fungoval spravne na kazde page
       if (isLogged())
       {
+        notificationDataBind();
         hideButtonsProfile(true);
         bindMenuForRole(int.Parse(Session["role"].ToString()));
       }
@@ -62,6 +59,23 @@ namespace Informacni_system
         hideButtonsProfile(false);
       }
     }
+
+    public void notificationDataBind()
+    {
+      DataTable notifications = new DataTable();
+      DataTable notifications_notSeen = new DataTable();
+
+      DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + (Session["userID"].ToString()), notifications);
+      DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + (Session["userID"].ToString()), notifications_notSeen);
+
+      int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
+      badge.Visible = true;
+      badge.InnerText = notSeenCount.ToString();
+
+      menu_ul_1.DataSource = notifications;
+      menu_ul_1.DataBind();
+    }
+
 
     public void DB_ExecuteNonQuery(string sql)
     {
@@ -101,23 +115,23 @@ namespace Informacni_system
 
     }
 
-    public void notificationDataBind()
-    {
-      int ID_user = 1;
+    //public void notificationDataBind()
+    //{
+    //  int ID_user = 1;
 
-      DataTable notifications = new DataTable();
-      DataTable notifications_notSeen = new DataTable();
+    //  DataTable notifications = new DataTable();
+    //  DataTable notifications_notSeen = new DataTable();
 
-      notifications_notSeen = DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + ID_user, notifications_notSeen);
-      int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
-      badge.InnerText = notSeenCount.ToString();
+    //  notifications_notSeen = DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + ID_user, notifications_notSeen);
+    //  int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
+    //  badge.InnerText = notSeenCount.ToString();
 
-      notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
+    //  notifications = DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + ID_user, notifications);
 
 
-      menu_ul_1.DataSource = notifications;
-      menu_ul_1.DataBind();
-    }
+    //  menu_ul_1.DataSource = notifications;
+    //  menu_ul_1.DataBind();
+    //}
 
     //Funkce pro skryti login/profilovych tlacitek/funkci
     public void loginDataBind(object sender, EventArgs e)
