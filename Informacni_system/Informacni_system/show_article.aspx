@@ -69,6 +69,8 @@
 
 
         <Columns>
+
+
           <asp:TemplateField ItemStyle-CssClass="detail">
             <HeaderTemplate>
               <asp:Label runat="server" Text="Název Článku"></asp:Label>
@@ -77,6 +79,11 @@
               <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
             </ItemTemplate>
           </asp:TemplateField>
+
+
+
+
+
           <asp:TemplateField ItemStyle-CssClass="detail">
             <HeaderTemplate>
               <asp:Label runat="server" Text="Autor článku"></asp:Label>
@@ -141,10 +148,21 @@
     <asp:HiddenField runat="server" ID="hfArticleID" />
     <div class="container">
       <h1 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Stav článku</h1>
-      <h3 class="text-center" style="margin-bottom: 10px;">
-        <asp:Label ID="nazevClankuLb" runat="server" Text="Název článku"></asp:Label></h3>
-      <h4 class="text-center" style="margin-bottom: 20px;">
-        <asp:Label ID="authorClankuLb" runat="server" Text="Autor článku"></asp:Label></h4>
+
+      <div class="row">
+        <div class="col">
+          <h4>
+            <asp:Label ID="nazevClankuLb" runat="server" Text="Název článku"></asp:Label><br />
+
+            <asp:Label ID="authorClankuLb" runat="server" Text="Autor článku"> </asp:Label><br />
+
+            <asp:Label ID="magazinClankuLb" runat="server" Text="sfg"> </asp:Label><br />
+          </h4>
+        </div>
+
+      </div>
+      <br />
+      <br />
 
       <%-- Prvni radek --%>
       <div class="row">
@@ -245,43 +263,44 @@
       </div>
 
 
-<%--      pri stavu 3 - prirazeni recenzentu k clanku --%>
+      <%--      pri stavu 3 - prirazeni recenzentu k clanku --%>
       <div id="divRecenzentAssigning" runat="server">
         <div class="row" style="margin-top: 20px;">
           <div class="col" id="assignRecenzent1" runat="server">
             <asp:Label ID="lbRecenzent1" runat="server" Text="Vybrat prvního recenzenta:"></asp:Label><br />
-            <asp:DropDownList runat="server" ID="ddlRecenzenti1" Style="width: 100%; height: 30px; margin-top: 10px"></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlRecenzenti1" Style="width: 100%; height: 30px; margin-top: 10px"></asp:DropDownList><br />
+            <asp:Label ID="lbRecenzent2" runat="server" Text="Vybrat druhého recenzenta:"></asp:Label><br />
+            <asp:DropDownList runat="server" ID="ddlRecenzenti2" Style="width: 100%; height: 30px; margin-top: 10px"></asp:DropDownList>
 
 
           </div>
           <div class="col" id="assignRecenzent2" runat="server">
-            <asp:Label ID="lbRecenzent2" runat="server" Text="Vybrat druhého recenzenta:"></asp:Label><br />
-            <asp:DropDownList runat="server" ID="ddlRecenzenti2" Style="width: 100%; height: 30px; margin-top: 10px"></asp:DropDownList>
-
+            Deadline recenze:
+            <asp:TextBox ID="tbRecenzeDeadline" TextMode="Date" runat="server" Style="width: 100%; margin-top: 10px"></asp:TextBox>
           </div>
         </div>
         <center>
-          <button id="btnAssignRecenzent" class="btn btn-danger loginRegisterRed" style="margin-top:20px"> Přiřadit recenzenty</button>
+            <asp:Button runat="server" id="btnAssignRecenzent" class="btn btn-danger loginRegisterRed" style="margin-top:20px" OnClick="btnAssignRecenzent_Click" Text="Přiřadit recenzenty"/>
         </center>
       </div>
 
 
 
 
-<%--      pri stavu 1 - kontrola zda clanek odpovida tematicky dilu casopisu--%>
+      <%--      pri stavu 1 - kontrola zda clanek odpovida tematicky dilu casopisu--%>
       <div id="divCheckMagazineTheme" runat="server">
         <center>
                  <h3>Odpovídá článek tématu čísla magazínu ?</h3>
         </center>
         <div class="row" style="margin-top: 20px;">
           <div class="col" id="Div2" runat="server">
-                        <asp:Button runat="server" ID="btnThemeChecks" class="btn confirmBtn" style="margin-top: 20px; color: white;" onclick="btnThemeChecks_click" Text="Téma odpovídá"/>
+            <asp:Button runat="server" ID="btnThemeChecks" class="btn confirmBtn" Style="margin-top: 20px; color: white;" OnClick="btnThemeChecks_click" Text="Téma odpovídá" />
           </div>
           <div class="col" id="Div3" runat="server">
-            <asp:Button runat="server" ID="btnThemeIncorrect" class="btn loginModalBtn" style="margin-top: 20px; color: white;" onclick="btnThemeIncorrect_click" Text="Téma neodpovídá"/>
+            <asp:Button runat="server" ID="btnThemeIncorrect" class="btn loginModalBtn" Style="margin-top: 20px; color: white;" OnClick="btnThemeIncorrect_click" Text="Téma neodpovídá" />
 
           </div>
-        </div>  
+        </div>
 
       </div>
 

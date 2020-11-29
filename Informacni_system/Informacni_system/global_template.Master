@@ -12,7 +12,7 @@
 
   <script src="Scripts/bootstrap.min.js"></script>
 
-    
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title></title>
   <asp:ContentPlaceHolder ID="head" runat="server">
@@ -35,19 +35,22 @@
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
           <div class="navbar-nav">
             <a href="show_article.aspx" class="nav-item nav-link">Prohlížet články</a>
-            <a href="addArticle.aspx" class="nav-item nav-link">Přidat článek</a>
-            <a href="artDetailRedaktor.aspx" class="nav-item nav-link">Detail článků</a>
-
+              
             <div class="nav-item dropdown">
+      
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
               <div class="dropdown-menu">
                 <a href="#" class="dropdown-item">Historie časopisu</a>
                 <a href="#" class="dropdown-item">Redakční rada</a>
                 <a href="#" class="dropdown-item">Kontakty</a>
-                
+
               </div>
             </div>
-
+                  <asp:Repeater ID="horizontalMenu" runat="server">
+                <ItemTemplate>
+                  <a href='<%# Eval("menuTarget")%>' runat="server" class="nav-item nav-link"><%# Eval("text")%> </a>
+                </ItemTemplate>
+              </asp:Repeater>
           </div>
           <div class="navbar-nav ml-auto" id="loginButtons" runat="server">
             <button type="button" class="btn btn-danger loginRegisterRed" data-toggle="modal" data-target="#signup">Přihlásit</button>
@@ -238,10 +241,10 @@
       </script>
       <script type="text/javascript">
         $(function () {
-            $("[rel='tooltip']").tooltip();
+          $("[rel='tooltip']").tooltip();
         });
-    </script>
-      
+      </script>
+
       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
       </asp:ContentPlaceHolder>
     </div>

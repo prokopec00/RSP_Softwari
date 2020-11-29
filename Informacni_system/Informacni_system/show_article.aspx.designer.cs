@@ -69,6 +69,15 @@ namespace Informacni_system
     protected global::System.Web.UI.WebControls.Label authorClankuLb;
 
     /// <summary>
+    /// magazinClankuLb control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label magazinClankuLb;
+
+    /// <summary>
     /// stavNovePodany control.
     /// </summary>
     /// <remarks>
@@ -177,15 +186,6 @@ namespace Informacni_system
     protected global::System.Web.UI.WebControls.DropDownList ddlRecenzenti1;
 
     /// <summary>
-    /// assignRecenzent2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl assignRecenzent2;
-
-    /// <summary>
     /// lbRecenzent2 control.
     /// </summary>
     /// <remarks>
@@ -202,6 +202,33 @@ namespace Informacni_system
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList ddlRecenzenti2;
+
+    /// <summary>
+    /// assignRecenzent2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl assignRecenzent2;
+
+    /// <summary>
+    /// tbRecenzeDeadline control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox tbRecenzeDeadline;
+
+    /// <summary>
+    /// btnAssignRecenzent control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnAssignRecenzent;
 
     /// <summary>
     /// divCheckMagazineTheme control.

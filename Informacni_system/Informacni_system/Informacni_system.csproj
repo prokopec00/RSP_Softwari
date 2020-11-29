@@ -146,6 +146,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="HelpDesk.aspx" />
     <Content Include="profil.aspx" />
+    <Content Include="reviewV2.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -327,6 +328,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="reviewV2.aspx.cs">
+      <DependentUpon>reviewV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reviewV2.aspx.designer.cs">
+      <DependentUpon>reviewV2.aspx</DependentUpon>
     </Compile>
     <Compile Include="show_article.aspx.cs">
       <DependentUpon>show_article.aspx</DependentUpon>

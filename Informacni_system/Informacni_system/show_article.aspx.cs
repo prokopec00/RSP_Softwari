@@ -170,8 +170,15 @@ namespace Informacni_system
       string nazevClanku = article[1].ToString();
       string autorClanku = article[2].ToString();
 
-      nazevClankuLb.Text = nazevClanku;
-      authorClankuLb.Text = autorClanku;
+      string magazineID = articles.Rows[0]["magazine"].ToString();
+      DataTable magazineFromID = new DataTable();
+      gt.DB_ExecuteTable("SELECT name FROM tbl_magazine WHERE id_magazine=" + magazineID,magazineFromID);
+
+      string magazineName = magazineFromID.Rows[0][0].ToString();
+
+      nazevClankuLb.Text = "Název článku: " +nazevClanku;
+      authorClankuLb.Text = "Autor článku: " + autorClanku;
+      magazinClankuLb.Text = "Číslo magazínu: " + magazineName;
       stateChanger(stateClanku);
 
       if (stateClanku != 1)
@@ -183,7 +190,11 @@ namespace Informacni_system
         divRecenzentAssigning.Visible = false;
       }
       else
+
       {
+
+        divRecenzentAssigning.Visible = true;
+
         DataTable recenzenti = new DataTable();
         gt.DB_ExecuteTable("SELECT *,CONCAT(name,' ',surname) namefull FROM tbl_user WHERE role=2", recenzenti);
 
@@ -394,7 +405,7 @@ namespace Informacni_system
     * @param rev Znamka, ktera se preveda na stars
     * @return string w star
     */
-    protected string starIt(int rev)
+    public string starIt(int rev)
     {
       string stars = "";
       switch (rev)
@@ -426,21 +437,21 @@ namespace Informacni_system
     {
       global_template gt = new global_template();
 
-      gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET author_allowed = '1' WHERE id_article='" + idArticle + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET author_allowed = '1' WHERE id_article='" + hfArticleID.Value + "'");
     }
 
     protected void rejectArt_Click(object sender, EventArgs e)
     {
       global_template gt = new global_template();
-      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '0' WHERE id_article='" + idArticle + "'");
-      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '8' WHERE id_article='" + idArticle + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '0' WHERE id_article='" + hfArticleID.Value + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '8' WHERE id_article='" + hfArticleID.Value + "'");
     }
 
     protected void aceptArt_Click(object sender, EventArgs e)
     {
       global_template gt = new global_template();
-      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '1' WHERE id_article='" + idArticle + "'");
-      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '6' WHERE id_article='" + idArticle + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '1' WHERE id_article='" + hfArticleID.Value + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '6' WHERE id_article='" + hfArticleID.Value + "'");
     }
 
 
@@ -502,11 +513,22 @@ namespace Informacni_system
 
       global_template gT = new global_template();
 
-      gT.DB_ExecuteNonQuery("UPDATE tbl_article SET state=2 WHERE id_article="+int.Parse(hfArticleID.Value));
+      gT.DB_ExecuteNonQuery("UPDATE tbl_article SET state=2 WHERE id_article=" + int.Parse(hfArticleID.Value));
       detailInit(int.Parse(hfArticleID.Value));
 
 
       articleDataBind();
+    }
+
+    protected void btnAssignRecenzent_Click(object sender, EventArgs e)
+    {
+      global_template gT = new global_template();
+
+      gT.DB_ExecuteNonQuery("INSERT INTO tbl_review_list (id_reviewer1,id_reviewer2,id_article,deadline,author_allowed) VALUES (" + ddlRecenzenti1.SelectedValue + "," + ddlRecenzenti2.SelectedValue + "," + hfArticleID.Value + ",'" + tbRecenzeDeadline.Text + "',0)");
+      gT.DB_ExecuteNonQuery("UPDATE tbl_article SET state=4 WHERE id_article=" + hfArticleID.Value);
+
+      detailInit(int.Parse(hfArticleID.Value));
+
     }
   }
 }
