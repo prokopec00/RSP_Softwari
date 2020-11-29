@@ -1,16 +1,45 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/global_template.Master" AutoEventWireup="true" CodeBehind="addArticle.aspx.cs" Inherits="Informacni_system.addArticle" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 152px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="width:50%;margin: 0 auto;margin-top:5%;">
+        <table class="tg">
+<thead>
+  <tr>
+    <th class="tg-krq0" colspan="2">
     <asp:FileUpload ID="FileUpload1" runat="server" accept=" .pdf" Width="100%" /><br />
+    </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="auto-style1">
     <asp:Label ID="Label1" runat="server" Text="Label">Jmeno autora : </asp:Label>
-    <asp:TextBox ID="autorJmeno" runat="server" ></asp:TextBox><br />
-    <asp:Label ID="Jmenoclanku" runat="server" Text="Jmeno clanku : "></asp:Label>
-    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox>
+    </td>
+    <td class="tg-0pky">    <asp:TextBox ID="autorJmeno" runat="server" ></asp:TextBox><br />
+</td>
+  </tr>
+  <tr>
+    <td class="auto-style1">    <asp:Label ID="Jmenoclanku" runat="server" Text="Jmeno clanku : "></asp:Label>
+</td>
+    <td class="tg-0pky">    <asp:TextBox ID="clanekJmeno" runat="server"></asp:TextBox>
+</td>
+  </tr>
+  <tr>
+    <td class="auto-style1">      <asp:Label runat="server" Text="Magazín"> <br /></asp:Label> 
+</td>
+    <td class="tg-0pky">    <asp:DropDownList Width="100%" ID="magazinList" runat="server"></asp:DropDownList>
+</td>
+  </tr>
+</tbody>
+</table>
+        <asp:Button ID="uploadBtn" runat="server" Text="Nahrá ke kontrole" OnClick="uploadBtn_Click" />
         <br />
-      <asp:Label runat="server" Text="Magazín"></asp:Label> <asp:DropDownList ID="magazinList" runat="server"></asp:DropDownList> <br />
-    <asp:LinkButton ID="Upload" runat="server" OnClick="Upload_Click">Nahrát ke kontrole</asp:LinkButton>
 <div style="margin-top:5%;">
     <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
     <Columns>
@@ -57,6 +86,5 @@
      <SortedDescendingHeaderStyle BackColor="#242121" />
 </asp:GridView>
          </div>   
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/show_article.aspx">Potvrdit</asp:HyperLink>
         </div>
 </asp:Content>

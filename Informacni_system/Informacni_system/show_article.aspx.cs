@@ -115,38 +115,8 @@ namespace Informacni_system
     //      Response.WriteFile(FileBuffer);
     //    }
     //  }
-    //  if (e.CommandName == "openDetail")
-    //  {
-    //    GridView grid = sender as GridView;
-    //    int index = Convert.ToInt32(e.CommandArgument);
-    //    HiddenField ArticleID = (HiddenField)GridView2.Rows[index].FindControl("hfArticleList_ArticleID");
-
-    //    hfArticleID.Value = ArticleID.Value;
-
-    //    pnlArticleDetail.Visible = true;
-
-    //    detailInit();
-    //    //TODO
-    //  }
+ 
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
     * Funkce na inicializaci udaju na strance
@@ -477,7 +447,7 @@ namespace Informacni_system
 
       var button = (System.Web.UI.WebControls.Button)sender;
       int id = Int32.Parse(button.Attributes["Value"]);
-
+            deleteFile(id);
       gt.DB_ExecuteNonQuery("DELETE FROM tbl_article WHERE id_article=" + id);
 
       articleDataBind();
@@ -489,8 +459,13 @@ namespace Informacni_system
       global_template gT = new global_template();
       DataTable complete = new DataTable();
 
-      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+            gv_ArticleOverview.Columns[6].Visible = false;
 
+            if (Session["role"] !=null) {
+                gv_ArticleOverview.Columns[6].Visible = true;
+            }
+            
       gv_ArticleOverview.DataSource = complete;
       gv_ArticleOverview.DataBind();
     }
@@ -530,5 +505,67 @@ namespace Informacni_system
       detailInit(int.Parse(hfArticleID.Value));
 
     }
-  }
+
+   
+
+        protected void btnOpen_Click(object sender, EventArgs e)
+        {
+            var button = (System.Web.UI.WebControls.Button)sender;
+            string FilePath = button.Attributes["Value"];
+            String FileBuffer = ("~/Aproved/" + FilePath);
+            if (FileBuffer != null)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-length", FileBuffer.Length.ToString());
+                Response.WriteFile(FileBuffer);
+            }
+        }
+        protected void deleteFile(int id)
+        { 
+
+            global_template gT = new global_template();
+            DataTable complete = new DataTable();
+            gT.DB_ExecuteTable("Select id_article,filename from tbl_article where id_article=" + id, complete);
+            string path = complete.Rows[0].Field<string>(1);
+            string filePath = Server.MapPath("~/Aproved/"+path.ToString());
+            File.Delete(filePath);
+        }
+
+        protected void gv_ArticleOverview_DataBound(object sender, EventArgs e)
+        {
+            /* if (Session["role"] != null)
+             {
+                 string role = (string)Session["role"];
+                 int.TryParse(role, out int i);
+                 foreach (GridViewRow rw in gv_ArticleOverview.Rows)
+                 {
+
+                     Label lb = (Label)rw.FindControl("lbArticle_accepted");
+                     string text = lb.Text;
+                     if ((i <= 2) && (text == "false"))
+                         rw.Visible = false;
+                 }
+             }*///todo
+
+            foreach (GridViewRow rw in gv_ArticleOverview.Rows)
+            {
+                Label lb = (Label)rw.FindControl("lbArticle_accepted");
+                string text = lb.Text;
+
+                if (Session["name"] == null)
+                {
+                    if (text == "False") {
+                        rw.Visible = false;
+                    }
+                }
+            }
+        }
+
+        protected void gv_ArticleOverview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    
 }

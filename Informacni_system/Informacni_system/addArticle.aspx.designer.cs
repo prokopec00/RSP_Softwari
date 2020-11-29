@@ -69,13 +69,13 @@ namespace Informacni_system
         protected global::System.Web.UI.WebControls.DropDownList magazinList;
 
         /// <summary>
-        /// ovládací prvek Upload.
+        /// ovládací prvek uploadBtn.
         /// </summary>
         /// <remarks>
         /// Automaticky generované pole.
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Upload;
+        protected global::System.Web.UI.WebControls.Button uploadBtn;
 
         /// <summary>
         /// ovládací prvek GridView1.
@@ -85,14 +85,5 @@ namespace Informacni_system
         /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
-        /// ovládací prvek HyperLink1.
-        /// </summary>
-        /// <remarks>
-        /// Automaticky generované pole.
-        /// Pro úpravy přesuňte pole deklarace ze souboru návrháře do souboru kódu na pozadí.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
     }
 }

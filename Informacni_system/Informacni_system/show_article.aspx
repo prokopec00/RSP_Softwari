@@ -62,10 +62,10 @@
             </div>
         </div>--%>
     <div>
-      <asp:GridView ID="gv_ArticleOverview" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: small;" CssClass="table  
+      <asp:GridView ID="gv_ArticleOverview" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
             table-bordered table-hover"
         HorizontalAlign="Center"
-        AllowSorting="True" GridLines="Horizontal" BackColor="#CCCCCC">
+        AllowSorting="True" GridLines="Horizontal" BackColor="White" OnDataBound="gv_ArticleOverview_DataBound" OnSelectedIndexChanged="gv_ArticleOverview_SelectedIndexChanged">
 
 
         <Columns>
@@ -78,6 +78,7 @@
             <ItemTemplate>
               <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
 
 
@@ -91,6 +92,7 @@
             <ItemTemplate>
               <asp:Label runat="server" ID="lbArticle_author" CssClass="" Style="" Text='<%#Eval("name_author")%>'></asp:Label>
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
           <asp:TemplateField ItemStyle-CssClass="detail">
             <HeaderTemplate>
@@ -99,6 +101,7 @@
             <ItemTemplate>
               <asp:Label runat="server" ID="lbArticle_state" CssClass="" Style="" Text='<%#Eval("state")%>'></asp:Label>
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
           <asp:TemplateField ItemStyle-CssClass="detail">
             <HeaderTemplate>
@@ -107,15 +110,18 @@
             <ItemTemplate>
               <asp:Label runat="server" ID="lbArticle_magazine" CssClass="" Style="" Text='<%#Eval("magazine")%>'></asp:Label>
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
-          <asp:TemplateField ItemStyle-CssClass="detail">
+          <asp:TemplateField Visible="false" ItemStyle-CssClass="detail">
             <HeaderTemplate>
               <asp:Label runat="server" Text="Přijato"></asp:Label>
             </HeaderTemplate>
             <ItemTemplate>
               <asp:Label runat="server" ID="lbArticle_accepted" CssClass="" Style="" Text='<%#Eval("accepted")%>'></asp:Label>
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
+          
           <%--            <asp:TemplateField ItemStyle-CssClass="detail">
                     <HeaderTemplate>
                       <asp:Label runat="server" Text="Moduly"></asp:Label>
@@ -124,17 +130,38 @@
                       <asp:Label runat="server" ID="tbSloupecModuly" CssClass="" Style="" Text='<%#Eval("moduly")%>'></asp:Label>
                     </ItemTemplate>
                   </asp:TemplateField>--%>
-          <asp:TemplateField ItemStyle-CssClass="detail">
+            <asp:TemplateField ItemStyle-CssClass="detail" ControlStyle-CssClass="btn btn-block" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid" ControlStyle-BackColor="White">
             <ItemTemplate>
-              <asp:Button runat="server" ID="btnDelete" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_article")%>' OnClick="btnDelete_Click" OnClientClick="return confirm('Opravdu chcete odstranit článek?');" Text="Odstranit" />
+              <asp:Button runat="server" ID="btnOpen" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("filename")%>' OnClick="btnOpen_Click" Text="Otevřít" />
             </ItemTemplate>
+                <ItemStyle CssClass="detail btn btn-block" />
+          </asp:TemplateField>
+          <asp:TemplateField ItemStyle-CssClass="detail" >
+            <ItemTemplate>
+              <asp:Button runat="server" ID="btnDelete" CssClass="btn btn-default" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid" ControlStyle-BackColor="White" Style="width: 100%" Value='<%#Eval("id_article")%>' OnClick="btnDelete_Click" OnClientClick="return confirm('Opravdu chcete odstranit článek?');" Text="Odstranit" />
+            </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
           <asp:TemplateField ItemStyle-CssClass="detail">
             <ItemTemplate>
-              <asp:Button runat="server" ID="btnDetail" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_article")%>' OnClick="btnDetail_Click" Text="Detail" />
+              <asp:Button runat="server" ID="btnDetail" CssClass="btn btn-default" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid" ControlStyle-BackColor="White" Style="width: 100%"  Value='<%#Eval("id_article")%>' OnClick="btnDetail_Click" Text="Detail" />
             </ItemTemplate>
+              <ItemStyle CssClass="detail" />
           </asp:TemplateField>
         </Columns>
+
+
+
+
+
+          <HeaderStyle BackColor="#E8212E" ForeColor="White" Height="80%" HorizontalAlign="Center" />
+
+
+
+
+
+          <RowStyle VerticalAlign="Middle" />
+          <SelectedRowStyle VerticalAlign="Middle" />
 
 
 

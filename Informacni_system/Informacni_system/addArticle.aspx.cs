@@ -12,48 +12,35 @@ namespace Informacni_system
 {
     public partial class addArticle : System.Web.UI.Page
     {
+      
+        DataTable tbl = new DataTable();
+
+
         global_template gT = new global_template();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                string[] filePaths = Directory.GetFiles(Server.MapPath("~/Uploads/"));
+                string[] filePaths = Directory.GetFiles(Server.MapPath("~/Aproved/"));
                 
                 DataTable complete = new DataTable();
-                string sql = "Select filename,name_author,name_article from tbl_article";
+               
+               string sql = "Select filename,name_author,name_article from tbl_article";
                 gT.DB_ExecuteTable(sql, complete);
 
-                DataTable uploaded = new DataTable();
-                DataRow up;
-                uploaded.Columns.Add("filename");
-                uploaded.Columns.Add("name_author");
-                uploaded.Columns.Add("name_article");
+                
 
-                foreach (string filePathaproved in filePaths)
-                {
-
-                    up = uploaded.NewRow();
-                    up["filename"] = Path.GetFileName(filePathaproved).ToString();
-                    up["name_author"] = (from DataRow aR in complete.Rows
-                                    where (string)aR["filename"] == (string)up["filename"]
-                                    select (string)aR["name_author"]).FirstOrDefault();
-                    up["name_article"] = (from DataRow aR in complete.Rows
-                                     where (string)aR["filename"] == (string)up["filename"]
-                                     select (string)aR["name_article"]).FirstOrDefault();
-                    uploaded.Rows.Add(up);
-
-                }
-
-                GridView1.DataSource = uploaded;
+                GridView1.DataSource = complete;
                 GridView1.DataBind();
             }
+     
             autorJmeno.Text = (string)Session["username"];
+            gT.DB_ExecuteTable("Select id_magazine,name from tbl_magazine", tbl);
             List<string> magazines = new List<string>();
-            magazines.Add("Sport");
-            magazines.Add("Kultura");
-            magazines.Add("Z domova");
-            magazines.Add("Ze sveta");
-            magazines.Add("Kutilove");
+           for(int i = 0; i < tbl.Rows.Count; i++)
+            {
+                magazines.Add((string) tbl.Rows[i]["name"]);
+            }
             magazinList.DataSource = magazines;
             magazinList.DataBind();
 
@@ -86,19 +73,19 @@ namespace Informacni_system
 
         protected void Upload_Click(object sender, EventArgs e)
         {
-            string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+            /*string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
             try
             {
-
-                string task1= "Insert into tbl_article(name_article,name_author,filename) values('"+ clanekJmeno.Text + "','" + autorJmeno.Text+"','" + fileName+"')";
+                int id_magazine = tbl.Rows[0].Field<int>(magazinList.SelectedIndex);
+                string task1 = "Insert into tbl_article(name_article,name_author,filename,magazine) values('"+ clanekJmeno.Text + "','" + autorJmeno.Text+"','" + fileName+"','"+id_magazine+"')";
                 gT.DB_ExecuteNonQuery(task1);
-                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
+                //FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Aproved/") + fileName);
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (System.IO.IOException)
             {
                 Response.Write("<script>alert('Vyberte soubor.');</script>");
-            }
+            }*/
         }
 
         protected void Checked_Click(object sender, EventArgs e)
@@ -113,7 +100,7 @@ namespace Informacni_system
                 GridView grid = sender as GridView;
                 int index = Convert.ToInt32(e.CommandArgument);
                 Label lb = (Label)GridView1.Rows[index].FindControl("Label3");
-                string filePath = Server.MapPath("~/Uploads/" + lb.Text);
+                string filePath = Server.MapPath("~/Aproved/" + lb.Text);
                 Response.ContentType = ContentType;
                 Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
                 Response.WriteFile(filePath);
@@ -124,11 +111,34 @@ namespace Informacni_system
                 GridView grid = sender as GridView;
                 int index = Convert.ToInt32(e.CommandArgument);
                 Label lb = (Label)GridView1.Rows[index].FindControl("Label3");
-                string filePath = Server.MapPath("~/Uploads/" + lb.Text);
+                string filePath = Server.MapPath("~/Aproved/" + lb.Text);
                 string task1 = "Delete from tbl_article where filename='" + lb.Text + "'";
                 gT.DB_ExecuteNonQuery(task1);
                 File.Delete(filePath);
                 Response.Redirect(Request.Url.AbsoluteUri);
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void uploadBtn_Click(object sender, EventArgs e)
+        {
+            string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+            
+            try
+            {
+                int id_magazine = tbl.Rows[0].Field<int>(magazinList.SelectedIndex);
+                string task1 = "Insert into tbl_article(name_article,name_author,filename,magazine) values('" + clanekJmeno.Text + "','" + autorJmeno.Text + "','" + fileName + "','" + id_magazine + "')";
+                gT.DB_ExecuteNonQuery(task1);
+                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Aproved/") + fileName);
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (System.IO.IOException)
+            {
+                Response.Write("<script>alert('Vyberte soubor.');</script>");
             }
         }
     }
