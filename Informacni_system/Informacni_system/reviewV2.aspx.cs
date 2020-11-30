@@ -175,6 +175,8 @@ namespace Informacni_system
                 //vlozit id recenze do id_review2
                 gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET id_review2= " + idReview + " WHERE id_review_list = " + hiddenIDlist.Value);
             }
+
+            reviewDataBind();
         }
     }
 }

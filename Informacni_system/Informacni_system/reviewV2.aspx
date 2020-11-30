@@ -8,87 +8,95 @@
     <asp:Label ID="testLb" runat="server"></asp:Label>
     <div class="container">
         <h1 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Recenze článků</h1>
-                <h2 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Články čekající na recenzi</h2>
-                <asp:GridView ID="recenzeGridView" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: small;" CssClass="table  
+        <h2 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Články čekající na recenzi</h2>
+        <asp:GridView ID="recenzeGridView" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
         table-bordered table-hover"
-                    HorizontalAlign="Center"
-                    AllowSorting="True" GridLines="Horizontal" BackColor="#CCCCCC">
-                    <Columns>
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Název Článku"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+            HorizontalAlign="Center"
+            AllowSorting="True" GridLines="Horizontal" BackColor="White">
+            <Columns>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Název Článku"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Autor článku"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbArticle_author" CssClass="" Style="" Text='<%#Eval("name_author")%>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Autor článku"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbArticle_author" CssClass="" Style="" Text='<%#Eval("name_author")%>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Deadline"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbDeadline" CssClass="" Style="" Text='<%#Eval("deadline")%>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Deadline"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbDeadline" CssClass="" Style="" Text='<%#Eval("deadline")%>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <ItemTemplate>
-                                <asp:Button runat="server" ID="btnRecenzovat" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_review_list")%>' OnClick="btnRecenzovat_Click" Text="Recenzovat" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-                <asp:HiddenField runat="server" ID="hiddenIDlist" />
-                <h2 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Zrecenzované články</h2>
-                <asp:GridView ID="recenzeDoneGridView" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: small;" CssClass="table  
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <ItemTemplate>
+                        <asp:Button runat="server" ID="btnRecenzovat" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_review_list")%>' OnClick="btnRecenzovat_Click" Text="Recenzovat" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <HeaderStyle BackColor="#E8212E" ForeColor="White" Height="80%" HorizontalAlign="Center" />
+            <RowStyle VerticalAlign="Middle" />
+            <SelectedRowStyle VerticalAlign="Middle" />
+        </asp:GridView>
+        <asp:HiddenField runat="server" ID="hiddenIDlist" />
+
+        <h2 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Zrecenzované články</h2>
+        <asp:GridView ID="recenzeDoneGridView" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
         table-bordered table-hover"
-                    HorizontalAlign="Center"
-                    AllowSorting="True" GridLines="Horizontal" BackColor="#CCCCCC">
-                    <Columns>
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Název Článku"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+            HorizontalAlign="Center"
+            AllowSorting="True" GridLines="Horizontal" BackColor="White">
+            <Columns>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Název Článku"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbArticle_name" CssClass="" Style="" Text='<%#Eval("name_article")%>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Autor článku"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbArticle_author" CssClass="" Style="" Text='<%#Eval("name_author")%>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Autor článku"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbArticle_author" CssClass="" Style="" Text='<%#Eval("name_author")%>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <HeaderTemplate>
-                                <asp:Label runat="server" Text="Deadline"></asp:Label>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label runat="server" ID="lbDeadline" CssClass="" Style="" Text='<%#Eval("deadline")%>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Deadline"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lbDeadline" CssClass="" Style="" Text='<%#Eval("deadline")%>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                        <asp:TemplateField ItemStyle-CssClass="detail">
-                            <ItemTemplate>
-                                <asp:Button runat="server" ID="btnZobrazitRecenzi" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_review_list")%>' onclick="btnZobrazitRecenzi_Click" Text="Zobrazit"/>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <asp:TemplateField ItemStyle-CssClass="detail">
+                    <ItemTemplate>
+                        <asp:Button runat="server" ID="btnZobrazitRecenzi" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("id_review_list")%>' OnClick="btnZobrazitRecenzi_Click" Text="Zobrazit" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <HeaderStyle BackColor="#E8212E" ForeColor="White" Height="80%" HorizontalAlign="Center" />
+            <RowStyle VerticalAlign="Middle" />
+            <SelectedRowStyle VerticalAlign="Middle" />
+        </asp:GridView>
+
         <div class="modal fade" role="dialog" tabindex="-1" id="recenzniForm">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
