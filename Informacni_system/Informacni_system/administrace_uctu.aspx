@@ -41,7 +41,8 @@
         Úprava záznamů:</p>
     <p class="auto-style1">
         Identifikační číslo záznamu:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="id_show" runat="server" OnTextChanged="id_show_TextChanged" Width="77px"></asp:TextBox>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="show" runat="server" Text="Zobrazit označený záznam" OnClick="show_Click" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br />
         Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="username_show" runat="server"></asp:TextBox>
@@ -63,8 +64,8 @@
     <br />
     </p>
     <p class="auto-style1">
-        <asp:Button ID="del" runat="server" Text="Odstranit označený záznam" />
-        <asp:Button ID="alter" runat="server" Text="Upravit označený záznam" />
+        <asp:Button ID="del" runat="server" Text="Odstranit označený záznam" OnClick="del_Click" />
+        <asp:Button ID="alter" runat="server" Text="Uložit změny v označeném záznamu" OnClick="alter_Click" />
         <br />
 
     

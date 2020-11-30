@@ -31,51 +31,76 @@ namespace Informacni_system
 
         }
 
-        protected void odeslat_Click(object sender, EventArgs e)
-        {
-            global_template dbSaver = new global_template();
-
-            //dbSaver.DB_ExecuteNonQuery("INSERT INTO `tbl_review` ( `review_title`, `rating`, `review_text`, `id_article`, `id_reviewer`)" +
-            //    " VALUES('" + review_title.Text + "', '" + rating.Text + "', '" + texteditor.Text + "', '" + id_article.Text + "', '1')");
-            //Response.Write("ulyeno");
-            //review_title.Text = "ulyeno";
-        }
+       
 
         protected void pridat_Click(object sender, EventArgs e)
         {
             global_template dbSaver = new global_template();
 
-            dbSaver.DB_ExecuteNonQuery("INSERT INTO `tbl_user` ( `username`, `name`, `surname`, `email`, `password`)" +
-                " VALUES('" + username.Text + "', '" + firstname.Text + "', '" + lastname.Text + "', '" + email.Text + "', '" + password.Text + "')");
+            dbSaver.DB_ExecuteNonQuery("INSERT INTO `tbl_user` ( `username`, `name`, `surname`, `email`,`role`, `password`)" +
+                " VALUES('" + username.Text + "', '" + firstname.Text + "', '" + lastname.Text + "', '" + email.Text + "', '" + role.Text + "','" + password.Text + "')");
             Response.Write("ulozeno");
-            // review_title.Text = "ulyeno";
+            
             
         }
 
-        protected void id_show_TextChanged(object sender, EventArgs e)
+       
+
+        protected void del_Click(object sender, EventArgs e)
         {
-            //int id_user = 1;
-            //global_template dbSaver = new global_template();
-            ////char bgr;
-            //DataTable bgr = new DataTable();
-            //bgr= dbSaver.DB_ExecuteTable("SELECT* FROM `tbl_user` WHERE id_user=1"+ id_user, bgr);
-            ////Response.Write("ulozeno");
-            ////DataList1= bgr;
-            //Response.Write(obj: bgr);
-            //Response.Write("ulozeno");
+            global_template dbSaver = new global_template();
             
-            //username_show.Text = obj: bgr;
+            dbSaver.DB_ExecuteNonQuery("DELETE FROM `tbl_user` WHERE `tbl_user`.`id_user` = '" + id_show.Text + "'");
+            Response.Write("zaznam odstranen");
+            
+
+
+
+
         }
-        //SELECT * FROM `tbl_user` WHERE id_user=1 
+
+        protected void show_Click(object sender, EventArgs e)
+        {
+            global_template dbSaver = new global_template();
+            DataTable zaznam = new DataTable();
+
+            dbSaver.DB_ExecuteTable("SELECT * FROM tbl_user  WHERE id_user='" + id_show.Text + "'", zaznam);
+
+
+            DataRow user = zaznam.Rows[0];
+            string username = user[1].ToString() + " ";
+            username_show.Text = username;
+           
+
+            string name = user[2].ToString() + " ";
+            firstname_show.Text = name;
+
+            string surname = user[3].ToString() + " ";
+            lastname_show.Text = surname;
+
+            string email = user[4].ToString() + " ";
+            email_show.Text = email;
+
+            string role = user[5].ToString() + " ";
+            role_show.Text = role;
+
+            string password = user[6].ToString() + " ";
+            password_show.Text = password;
+
+            Response.Write("zaznam oznacen");
+
+
+        }
+
+        protected void alter_Click(object sender, EventArgs e)
+        {
+            global_template dbSaver = new global_template();
+
+            dbSaver.DB_ExecuteNonQuery(" UPDATE `tbl_user` SET `username` = '" + username_show.Text + "', `name` = '" + firstname_show.Text + "', `surname` = '" + lastname_show.Text + "', `email` = '" + email_show.Text + "', `role` = '" + role_show.Text + "', `password` = '" + password_show.Text + "' WHERE `tbl_user`.`id_user` = '" + id_show.Text + "'");
+            Response.Write("ulozeno");
+
+                    }
         
-
-
-
-//        DECLARE @Msg VARCHAR(300)= 'My Name is Rajendra Gupta';
-//PRINT @Msg;
-
-
-        //id_review 	review_title 	rating 	review_text 	id_article 	id_reviewer 
 
     }
 }
