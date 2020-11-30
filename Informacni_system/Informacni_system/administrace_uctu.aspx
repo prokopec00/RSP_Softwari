@@ -60,7 +60,7 @@
         <asp:TextBox ID="role_show" runat="server"></asp:TextBox>
         <br />
         heslo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="password_show" runat="server"></asp:TextBox>
+        <asp:TextBox ID="password_show" runat="server" ToolTip="v db jsou hesla zahashovaná, proto nelze zobrazit aktuální heslo lze ho však změnit"></asp:TextBox>
     <br />
     </p>
     <p class="auto-style1">
