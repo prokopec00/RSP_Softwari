@@ -22,5 +22,9 @@ namespace Informacni_system
 
     }
 
+    protected void Unnamed_Click(object sender, EventArgs e)
+    {
+      Response.Redirect("show_article.aspx");
     }
+  }
 }

@@ -22,7 +22,7 @@ namespace Informacni_system
 
 
 
-            DataTable query = new DataTable();
+      DataTable query = new DataTable();
       global_template gt = new global_template();
       //gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state=1 WHERE id_article=10");
       //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN state SET DEFAULT 1");
@@ -114,7 +114,7 @@ namespace Informacni_system
     //      Response.WriteFile(FileBuffer);
     //    }
     //  }
- 
+
     //}
 
     /**
@@ -126,7 +126,7 @@ namespace Informacni_system
 
       recenzeDiv1.Visible = false;
       recenzeDiv2.Visible = false;
-      allowButtonDiv.Visible = false;
+      //allowButtonDiv.Visible = false;
       acrejButtonDiv.Visible = false;
 
       global_template gt = new global_template();
@@ -141,20 +141,20 @@ namespace Informacni_system
 
       string magazineID = articles.Rows[0]["magazine"].ToString();
       DataTable magazineFromID = new DataTable();
-      gt.DB_ExecuteTable("SELECT name FROM tbl_magazine WHERE id_magazine=" + magazineID,magazineFromID);
+      gt.DB_ExecuteTable("SELECT name FROM tbl_magazine WHERE id_magazine=" + magazineID, magazineFromID);
 
       string magazineName = magazineFromID.Rows[0][0].ToString();
 
-      nazevClankuLb.Text = "Název článku: " +nazevClanku;
+      nazevClankuLb.Text = "Název článku: " + nazevClanku;
       authorClankuLb.Text = "Autor článku: " + autorClanku;
       magazinClankuLb.Text = "Číslo magazínu: " + magazineName;
       stateChanger(stateClanku);
 
-      if (stateClanku != 1)
+      if (stateClanku != 1 || !Session["role"].ToString().Equals("3"))
       {
         divCheckMagazineTheme.Visible = false;
       }
-      if (stateClanku != 3)
+      if (stateClanku != 3 || !Session["role"].ToString().Equals("3"))
       {
         divRecenzentAssigning.Visible = false;
       }
@@ -182,7 +182,11 @@ namespace Informacni_system
 
 
       if (stateClanku < 4)
+      {
+
         return;
+
+      }
       DataTable reviewsList = new DataTable();
       gt.DB_ExecuteTable("SELECT * FROM tbl_review_list WHERE id_article='" + idArticle + "'", reviewsList);
       DataRow reviewList = reviewsList.Rows[0];
@@ -249,6 +253,18 @@ namespace Informacni_system
     {
       global_template gt = new global_template();
 
+      int articleID = int.Parse(hfArticleID.Value);
+      DataTable temporary = new DataTable();
+
+      gt.DB_ExecuteTable("SELECT * FROM tbl_article WHERE id_article=" + articleID, temporary);
+
+      string username = temporary.Rows[0]["name_author"].ToString();
+
+      DataTable temporary2 = new DataTable();
+
+
+      gt.DB_ExecuteTable("SELECT * FROM tbl_review_list WHERE id_article=" + articleID, temporary2);
+
       if (rev1 != -1)
       {
         DataTable reviewTable1 = new DataTable();
@@ -264,7 +280,17 @@ namespace Informacni_system
         ratingText1.Text = review1[5].ToString();
 
         stavPosudek1.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-        recenzeDiv1.Visible = true;
+
+
+        if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")))
+        {
+          recenzeDiv1.Visible = true;
+        }
+        else
+        {
+          recenzeDiv1.Visible = false;
+        }
+
       }
       else
       {
@@ -286,18 +312,39 @@ namespace Informacni_system
         ratingText2.Text = review2[5].ToString();
 
         stavPosudek2.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-        recenzeDiv2.Visible = true;
+
+        if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")))
+        {
+          recenzeDiv2.Visible = true;
+        }
+        else
+        {
+          recenzeDiv2.Visible = false;
+        }
+
       }
       else
       {
         recenzeDiv2.Visible = false;
         stavPosudek2.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
       }
-      if (rev1 != -1 && rev2 != -1)
+      if ((rev1 != -1 && rev2 != -1) && stavKonec.Text.Equals("<i class=\"fa fa-times-circle fauncheck\"></i>"))
       {
-        allowButtonDiv.Visible = true;
+        //allowButtonDiv.Visible = true;
         acrejButtonDiv.Visible = true;
       }
+      else
+      {
+        acrejButtonDiv.Visible = false;
+      }
+
+     
+
+
+
+
+
+
     }
 
     /**
@@ -313,56 +360,56 @@ namespace Informacni_system
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           break;
         case 2:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavKonec.Text = "Tématická nevhodnost";
           break;
         case 3:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           break;
         case 4:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           break;
         case 5:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           break;
         case 6:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Přijato";
           break;
         case 7:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Přijato s výhradami";
           break;
         case 8:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Zamítnuto";
           break;
       }
@@ -402,18 +449,22 @@ namespace Informacni_system
     * Povolit zobrazeni recenzi autorovi
     * @author Robert Havranek
     */
-    protected void allowAccess_Click(object sender, EventArgs e)
-    {
-      global_template gt = new global_template();
+    //protected void allowAccess_Click(object sender, EventArgs e)
+    //{
+    //  global_template gt = new global_template();
 
-      gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET author_allowed = '1' WHERE id_article='" + hfArticleID.Value + "'");
-    }
+
+    //}
 
     protected void rejectArt_Click(object sender, EventArgs e)
     {
       global_template gt = new global_template();
       gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '0' WHERE id_article='" + hfArticleID.Value + "'");
       gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '8' WHERE id_article='" + hfArticleID.Value + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET author_allowed = '1' WHERE id_article='" + hfArticleID.Value + "'");
+
+      int id = int.Parse(hfArticleID.Value);
+      detailInit(id);
     }
 
     protected void aceptArt_Click(object sender, EventArgs e)
@@ -421,6 +472,11 @@ namespace Informacni_system
       global_template gt = new global_template();
       gt.DB_ExecuteNonQuery("UPDATE tbl_article SET accepted = '1' WHERE id_article='" + hfArticleID.Value + "'");
       gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state = '6' WHERE id_article='" + hfArticleID.Value + "'");
+      gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET author_allowed = '1' WHERE id_article='" + hfArticleID.Value + "'");
+
+      int id = int.Parse(hfArticleID.Value);
+
+      detailInit(id);
     }
 
 
@@ -446,7 +502,7 @@ namespace Informacni_system
 
       var button = (System.Web.UI.WebControls.Button)sender;
       int id = Int32.Parse(button.Attributes["Value"]);
-            deleteFile(id);
+      deleteFile(id);
       gt.DB_ExecuteNonQuery("DELETE FROM tbl_article WHERE id_article=" + id);
 
       articleDataBind();
@@ -457,14 +513,14 @@ namespace Informacni_system
 
       global_template gT = new global_template();
       DataTable complete = new DataTable();
-            gv_ArticleOverview.Columns[7].Visible = false;
-            gv_ArticleOverview.Columns[2].Visible = false;
-            gv_ArticleOverview.Columns[6].Visible = false;
+      gv_ArticleOverview.Columns[7].Visible = false;
+      gv_ArticleOverview.Columns[2].Visible = false;
+      gv_ArticleOverview.Columns[6].Visible = false;
 
-            gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
 
-           
-            
+
+
       gv_ArticleOverview.DataSource = complete;
       gv_ArticleOverview.DataBind();
     }
@@ -505,79 +561,80 @@ namespace Informacni_system
 
     }
 
-   
 
-        protected void btnOpen_Click(object sender, EventArgs e)
-        {
-            var button = (System.Web.UI.WebControls.Button)sender;
-            string FilePath = button.Attributes["Value"];
-            String FileBuffer = ("~/Aproved/" + FilePath);
-            if (FileBuffer != null)
-            {
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("content-length", FileBuffer.Length.ToString());
-                Response.WriteFile(FileBuffer);
-            }
-        }
-        protected void deleteFile(int id)
-        { 
 
-            global_template gT = new global_template();
-            DataTable complete = new DataTable();
-            gT.DB_ExecuteTable("Select id_article,filename from tbl_article where id_article=" + id, complete);
-            string path = complete.Rows[0].Field<string>(1);
-            string filePath = Server.MapPath("~/Aproved/"+path.ToString());
-            File.Delete(filePath);
-        }
+    protected void btnOpen_Click(object sender, EventArgs e)
+    {
+      var button = (System.Web.UI.WebControls.Button)sender;
+      string FilePath = button.Attributes["Value"];
+      String FileBuffer = ("~/Aproved/" + FilePath);
+      if (FileBuffer != null)
+      {
+        Response.ContentType = "application/pdf";
+        Response.AddHeader("content-length", FileBuffer.Length.ToString());
+        Response.WriteFile(FileBuffer);
+      }
+    }
+    protected void deleteFile(int id)
+    {
 
-        protected void gv_ArticleOverview_DataBound(object sender, EventArgs e)
-        {
-            /* if (Session["role"] != null)
-             {
-                 string role = (string)Session["role"];
-                 int.TryParse(role, out int i);
-                 foreach (GridViewRow rw in gv_ArticleOverview.Rows)
-                 {
-
-                     Label lb = (Label)rw.FindControl("lbArticle_accepted");
-                     string text = lb.Text;
-                     if ((i <= 2) && (text == "false"))
-                         rw.Visible = false;
-                 }
-             }*///todo
-
-            foreach (GridViewRow rw in gv_ArticleOverview.Rows)
-            {
-                Label lb = (Label)rw.FindControl("lbArticle_accepted");
-                string text = lb.Text;
-
-                if (Session["name"] == null)
-                {
-                    if (text == "False") {
-                        rw.Visible = false;
-                    }
-                }
-            }
-            if (Session["role"] != null)
-            {
-                if (int.Parse((string)Session["role"]) > 1)
-                {
-                    gv_ArticleOverview.Columns[7].Visible = true;
-                }
-                gv_ArticleOverview.Columns[2].Visible = true;
-                if (int.Parse((string) Session["role"]) >2)
-                {
-                    gv_ArticleOverview.Columns[6].Visible = true;
-                }
-            }
-
-        }
-
-        protected void gv_ArticleOverview_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      global_template gT = new global_template();
+      DataTable complete = new DataTable();
+      gT.DB_ExecuteTable("Select id_article,filename from tbl_article where id_article=" + id, complete);
+      string path = complete.Rows[0].Field<string>(1);
+      string filePath = Server.MapPath("~/Aproved/" + path.ToString());
+      File.Delete(filePath);
     }
 
-    
+    protected void gv_ArticleOverview_DataBound(object sender, EventArgs e)
+    {
+      /* if (Session["role"] != null)
+       {
+           string role = (string)Session["role"];
+           int.TryParse(role, out int i);
+           foreach (GridViewRow rw in gv_ArticleOverview.Rows)
+           {
+
+               Label lb = (Label)rw.FindControl("lbArticle_accepted");
+               string text = lb.Text;
+               if ((i <= 2) && (text == "false"))
+                   rw.Visible = false;
+           }
+       }*///todo
+
+      foreach (GridViewRow rw in gv_ArticleOverview.Rows)
+      {
+        Label lb = (Label)rw.FindControl("lbArticle_accepted");
+        string text = lb.Text;
+
+        if (Session["name"] == null)
+        {
+          if (text == "False")
+          {
+            rw.Visible = false;
+          }
+        }
+      }
+      if (Session["role"] != null)
+      {
+        if (int.Parse((string)Session["role"]) >= 1) //sloupec detailu článků (případně upravit)
+        {
+          gv_ArticleOverview.Columns[7].Visible = true;
+        }
+        gv_ArticleOverview.Columns[2].Visible = true;
+        if (int.Parse((string)Session["role"]) > 1)
+        {
+          gv_ArticleOverview.Columns[6].Visible = true;
+        }
+      }
+
+    }
+
+    protected void gv_ArticleOverview_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+  }
+
+
 }

@@ -35,7 +35,9 @@
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
           <div class="navbar-nav">
             <a href="show_article.aspx" class="nav-item nav-link">Prohlížet články</a>
-              
+
+                          <a href="HelpDesk.aspx" class="nav-item nav-link">Formulář podpory</a>
+
             <div class="nav-item dropdown">
       
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>

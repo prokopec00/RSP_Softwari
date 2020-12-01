@@ -227,12 +227,12 @@
                     <asp:Label runat="server" ID="stavZverejnen" Text='<i class="fa fa-times-circle fauncheck"></i>'></asp:Label>
                   </td>
                 </tr>
-                <tr>
+    <%--            <tr>
                   <td>Probíhá úprava textu autorem</td>
                   <td class="text-center">
                     <asp:Label runat="server" ID="stavUpravaAutor" Text='<i class="fa fa-times-circle fauncheck"></i>'></asp:Label>
                   </td>
-                </tr>
+                </tr>--%>
                 <tr>
                   <td>Příspěvek je přijat k vydání nebo zamítnut</td>
                   <td class="text-center">
@@ -441,12 +441,12 @@
         </div>
       </div>
       <%-- Radek na zpristupneni recenzi autorovi --%>
-      <div class="row" style="margin-bottom: 20px;" id="allowButtonDiv" runat="server">
-        <div class="col text-center">
+ <%--     <div class="row" style="margin-bottom: 20px;" id="allowButtonDiv" runat="server">
+        <div class="col text-center">--%>
           <%--<button class="btn btn-primary btn-lg text-white loginModalBtn" type="button">Zpřístupnit recenze autorům</button>--%>
-          <asp:Button ID="allowAccess" CssClass="btn btn-primary btn-lg text-white loginModalBtn" Text="Zpřístupnit recenze autorovi" runat="server" OnClick="allowAccess_Click" />
+  <%--        <asp:Button ID="allowAccess" CssClass="btn btn-primary btn-lg text-white loginModalBtn" Text="Zpřístupnit recenze autorovi" runat="server" OnClick="allowAccess_Click" />
         </div>
-      </div>
+      </div>--%>
       <%-- Radek na schvaleni/zamitnuti clanku --%>
       <div class="row text-center" id="acrejButtonDiv" runat="server">
         <div class="col" style="margin-bottom: 20px;">

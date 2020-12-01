@@ -19,95 +19,75 @@ namespace Informacni_system
     protected void Page_Load(object sender, EventArgs e)
     {
 
-
-
-
-      //int ID_user = 1;
-
-
-
-      //notifications_notSeen = 
-    
-
-      //
-
-      DataTable test = new DataTable();
-      //DB_ExecuteTable("SELECT * FROM tbl_article", test);
-      DB_ExecuteTable("SELECT * FROM tbl_states", test);
-      //DB_ExecuteTable("SELECT * FROM tbl_review_list", test);
-
-
-      //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panrecenzent','pan','recenzent','recenzent@abc.gg',2,'"+passHash("recenzent")+"')");
-      //DB_ExecuteNonQuery("INSERT INTO tbl_user (username,name,surname,email,role,password) VALUES ('panirecenzentova','pani','recenzentova','recenzent@abc.gg',2,'" + passHash("recenzentova") + "')");
-
-      string br = "";
-
-
-
       //inicializace avataru
       avatarInit();
 
       //aby profil v menu fungoval spravne na kazde page
       if (isLogged())
       {
-        notificationDataBind();
         hideButtonsProfile(true);
         bindMenuForRole(int.Parse(Session["role"].ToString()));
+        notificationDataBind();
+
       }
       else
       {
         hideButtonsProfile(false);
       }
+
     }
 
     public void notificationDataBind()
     {
-      DataTable notifications = new DataTable();
-      DataTable notifications_notSeen = new DataTable();
+      if (Session["userID"] != null)
+      {
+        DataTable notifications = new DataTable();
+        DataTable notifications_notSeen = new DataTable();
 
-      DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + (Session["userID"].ToString()), notifications);
-      DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + (Session["userID"].ToString()), notifications_notSeen);
+        DB_ExecuteTable("SELECT * FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE l.id_user =" + (Session["userID"].ToString()), notifications);
+        DB_ExecuteTable("SELECT COUNT(*) FROM tbl_notification n LEFT OUTER JOIN tbl_notification_link l ON n.ID_notification=l.ID_notification WHERE seen=0 AND l.id_user =" + (Session["userID"].ToString()), notifications_notSeen);
 
-      int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
-      badge.Visible = true;
-      badge.InnerText = notSeenCount.ToString();
+        int notSeenCount = int.Parse(notifications_notSeen.Rows[0][0].ToString());
+        badge.Visible = true;
+        badge.InnerText = notSeenCount.ToString();
 
-      menu_ul_1.DataSource = notifications;
-      menu_ul_1.DataBind();
+        menu_ul_1.DataSource = notifications;
+        menu_ul_1.DataBind();
+      }
     }
 
 
     public void DB_ExecuteNonQuery(string sql)
     {
-      MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
-      conn_string.Server = "db4free.net";
-      conn_string.UserID = "rsp_prokopec";
-      conn_string.Password = "freeacc123";
-      conn_string.Database = "rsp_prokopec";
-      conn_string.Port = 3306;
+      //MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
+      //conn_string.Server = "db4free.net";
+      //conn_string.UserID = "rsp_prokopec";
+      //conn_string.Password = "freeacc123";
+      //conn_string.Database = "rsp_prokopec";
+      //conn_string.Port = 3306;
 
-      MySqlConnection conn = new MySqlConnection(conn_string.ToString());
+      SqlConnection conn = new SqlConnection("Data Source=SQL5053.site4now.net;Initial Catalog=DB_A6B685_prokopec;User Id=DB_A6B685_prokopec_admin;Password=freeacc123");
       conn.Open();
 
 
-      MySqlCommand sqlCommand = new MySqlCommand(sql, conn);
-      sqlCommand.ExecuteNonQuery();
+      SqlCommand sqlcommand = new SqlCommand(sql, conn);
+      sqlcommand.ExecuteNonQuery();
       conn.Close();
     }
 
     public DataTable DB_ExecuteTable(string sql, DataTable table)
     {
-      MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
-      conn_string.Server = "db4free.net";
-      conn_string.UserID = "rsp_prokopec";
-      conn_string.Password = "freeacc123";
-      conn_string.Database = "rsp_prokopec";
-      conn_string.Port = 3306;
+      //MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
+      //conn_string.Server = "db4free.net";
+      //conn_string.UserID = "rsp_prokopec";
+      //conn_string.Password = "freeacc123";
+      //conn_string.Database = "rsp_prokopec";
+      //conn_string.Port = 3306;
 
-      MySqlConnection conn = new MySqlConnection(conn_string.ToString());
+      SqlConnection conn = new SqlConnection("Data Source=SQL5053.site4now.net;Initial Catalog=DB_A6B685_prokopec;User Id=DB_A6B685_prokopec_admin;Password=freeacc123");
       conn.Open();
-      MySqlCommand sqlCommand = new MySqlCommand(sql, conn);
-      MySqlDataAdapter sqlAdapter = new MySqlDataAdapter(sqlCommand);
+      SqlCommand sqlCommand = new SqlCommand(sql, conn);
+      SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
       sqlAdapter.Fill(table);
       conn.Close();
       return table;
@@ -173,7 +153,7 @@ namespace Informacni_system
       menuForRole.Columns.Add("menuTarget");
       menuForRole.Columns.Add("text");
 
-      if (ID_role == 1)
+      if (ID_role == 1)// menu pro autora
       {
         DataRow row = menuForRole.NewRow();
         row["menuTarget"] = "addArticle.aspx";
@@ -185,7 +165,19 @@ namespace Informacni_system
         horizontalMenu.DataSource = menuForRole;
         horizontalMenu.DataBind();
       }
-      else if (ID_role == 5)
+      else if (ID_role == 2) //menu pro recenzenta
+      {
+        DataRow row = menuForRole.NewRow();
+        row["menuTarget"] = "reviewV2.aspx";
+        row["text"] = "Spravovat Recenze";
+
+        menuForRole.Rows.Add(row);
+
+
+        horizontalMenu.DataSource = menuForRole;
+        horizontalMenu.DataBind();
+      }
+      else if (ID_role == 5) //menu pro administratora
       {
         DataRow row = menuForRole.NewRow();
         row["menuTarget"] = "administrace_uctu.aspx";
@@ -231,6 +223,9 @@ namespace Informacni_system
           //Response.Redirect("index.aspx");
 
           bindMenuForRole(int.Parse(Session["role"].ToString()));
+          notificationDataBind();
+          avatarInit();
+
 
         }
         else

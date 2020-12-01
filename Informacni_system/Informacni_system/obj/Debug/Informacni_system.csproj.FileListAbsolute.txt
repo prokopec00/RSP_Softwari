@@ -274,4 +274,3 @@ C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Inform
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj.CopyComplete
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.pdb
-C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\bin\GroupDocs.Comparison.xml
