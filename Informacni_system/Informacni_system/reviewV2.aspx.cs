@@ -156,7 +156,7 @@ namespace Informacni_system
 
             //nalezeni ID nove recenze
             DataTable revs = new DataTable();
-            gt.DB_ExecuteTable("SELECT * FROM tbl_review2 ORDER BY id_review DESC LIMIT 1", revs);
+            gt.DB_ExecuteTable("SELECT TOP 1 * FROM tbl_review2 ORDER BY id_review DESC", revs);
             DataRow lastRow = revs.Rows[0];
 
             int idReview = Convert.ToInt32(lastRow[0]);

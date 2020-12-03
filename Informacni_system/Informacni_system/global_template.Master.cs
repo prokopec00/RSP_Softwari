@@ -493,7 +493,8 @@ namespace Informacni_system
     {
       if (Session["userID"] != null)
       {
-        string avatarsFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\";
+        string avatarsFolder = Server.MapPath("~/Uploads/Avatars/");
+
         if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".jpg"))
         {
           profileAvatarSmall.ImageUrl = @"Uploads\Avatars\" + Session["userID"].ToString() + ".jpg";

@@ -180,9 +180,7 @@
     <Content Include="zadani_clanku.aspx" />
     <Content Include="zadani_recenze.aspx" />
     <Content Include="predloha.Master" />
-    <Content Include="Aproved\BeskydCeníkVObalení20200201.pdf" />
-    <Content Include="Aproved\NUM_Finding the local minimum and local maximum.pdf" />
-    <Content Include="Aproved\opora xZEK.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -398,6 +396,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Aproved\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>

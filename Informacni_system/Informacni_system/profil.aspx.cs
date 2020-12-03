@@ -39,10 +39,10 @@ namespace Informacni_system
                 profilSurname.Text = Session["surname"].ToString();
                 profilEmail.Text = Session["email"].ToString();
                 profilRole.Text = getRole(Session["role"].ToString());
-                //TODO: inicializace Avatara
-                string avatarsFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\";
-                //zkusit, jestli ma uzivatel avatar - pripadne nastavit default
-                if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".jpg"))
+        //TODO: inicializace Avatara
+        string avatarsFolder = Server.MapPath("~/Uploads/Avatars/");
+        //zkusit, jestli ma uzivatel avatar - pripadne nastavit default
+        if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".jpg"))
                 {
                     profileAvatarBig.ImageUrl = @"Uploads\Avatars\" + Session["userID"].ToString() + ".jpg";
                     profileAvataImg.ImageUrl = @"Uploads\Avatars\" + Session["userID"].ToString() + ".jpg";
@@ -298,8 +298,8 @@ namespace Informacni_system
         protected void uploadButton_Click(object sender, EventArgs e)
         {
             Page.ClientScript.RegisterStartupScript(this.GetType(), "showAvatar", "showAvatar()", true);
-            string uploadFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\pre\";
-            if (FileUpload1.HasFile)
+      string uploadFolder = Server.MapPath("~/Uploads/Avatars/pre/");
+      if (FileUpload1.HasFile)
             {
                 if (System.IO.File.Exists(uploadFolder + Session["userID"].ToString() + ".jpg"))
                 {
@@ -356,11 +356,12 @@ namespace Informacni_system
         */
         protected void saveAvatar_Click(object sender, EventArgs e)
         {
-            string preFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\pre\";
-            string avatarsFolder = Request.PhysicalApplicationPath + @"Uploads\Avatars\";
+      string preFolder = Server.MapPath("~/Uploads/Avatars/pre/");
+      string avatarsFolder = Server.MapPath("~/Uploads/Avatars/");
 
-            //zkusit, jestli uz byl pouzivany avatar - pripadne smazat
-            if (!Page.IsPostBack)
+
+      //zkusit, jestli uz byl pouzivany avatar - pripadne smazat
+      if (!Page.IsPostBack)
             {
                 if (System.IO.File.Exists(avatarsFolder + Session["userID"].ToString() + ".jpg"))
                     System.IO.File.Delete(avatarsFolder + Session["userID"].ToString() + ".jpg");

@@ -26,7 +26,20 @@ namespace Informacni_system
       global_template gt = new global_template();
       //gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state=1 WHERE id_article=10");
       //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN state SET DEFAULT 1");
-      //gt.DB_ExecuteNonQuery("ALTER TABLE tbl_article ALTER COLUMN magazine SET DEFAULT 1");
+
+
+
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Jirasek','Ondřej','Jirásek','Jirasek@Ondrej.cz',2,'" + gt.passHash("recenzent2") + "')");
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Horak','Filip','Horák','Filip@Horak.cz',2,'" + gt.passHash("recenzent3") + "')");
+
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Novak','Petr','Novák','Novak@Petr.cz',3,'" + gt.passHash("redaktor1") + "')");
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Nguyen','Jiří','Nguyen','Nguyen@Jiri.vn',3,'" + gt.passHash("redaktor2") + "')");
+
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Holba','Pavel','Holba','Holba@Pavel.cz',4,'" + gt.passHash("sefredaktor1")+"')");
+
+      //gt.DB_ExecuteNonQuery("INSERT INTO tbl_user VALUES ('Zeman','Lukáš','Zeman','Zeman@Lukas.cz',5,'" + gt.passHash("admin1") + "')");
+
+
       //gt.DB_ExecuteTable("SELECT * FROM tbl_review2", query);
       gt.DB_ExecuteTable("SELECT * FROM tbl_review_list", query);
 
