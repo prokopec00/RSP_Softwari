@@ -530,7 +530,7 @@ namespace Informacni_system
       gv_ArticleOverview.Columns[2].Visible = false;
       gv_ArticleOverview.Columns[6].Visible = false;
 
-      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state", complete);
+      gT.DB_ExecuteTable("SELECT a.ID_article,a.name_article, a.name_author,a.accepted,a.filename,s.state,m.name magazine FROM tbl_article a LEFT OUTER JOIN tbl_magazine m ON a.magazine=m.ID_magazine LEFT OUTER JOIN tbl_states s ON a.state=s.ID_state ORDER BY a.ID_article DESC", complete);
 
 
 
