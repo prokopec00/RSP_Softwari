@@ -53,6 +53,7 @@ namespace Informacni_system
 
         articleDataBind();
 
+
       }
     }
 

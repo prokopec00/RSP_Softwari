@@ -19,6 +19,10 @@ namespace Informacni_system
         global_template gT = new global_template();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userID"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
             if (!IsPostBack)
             {
                 string[] filePaths = Directory.GetFiles(Server.MapPath("~/Aproved/"));
