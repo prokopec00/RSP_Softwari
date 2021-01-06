@@ -9,10 +9,13 @@
             <div class="col" style="text-align: center;">
                 <h1>Můj Profil</h1>
             </div>
+            <a class="helpSign float-right" href="#">
+                    <i class="fa fa-question-circle" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Na této stránce si můžete prohlédnout informace o vašem profilu. Dále si můžete změnit avatara, když na něho najedete a kliknete myší. Na této stránce si i můžete upravit vaše informace nebo změnit heslo."></i>
+            </a>
         </div>
         <div class="col" style="margin: auto; width: 24%; padding-top: 10px;">
             <i href="" data-toggle="modal" data-target="#profilAvatar">
-                <div class="col profileImg">
+                <div class="col profileImg"  data-toggle="tooltip" data-bs-tooltip="" data-placement="right" title="Změnit avatar">
                     <%--<img src="/Images/profile_empty.png" alt="Avatar" class="profileIm">--%>
                     <asp:Image ID="profileAvatarBig" runat="server" CssClass="profileIm" />
                     <div class="middleProfileImg">

@@ -175,6 +175,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="sefredaktor_prehled.aspx" />
     <Content Include="show_article.aspx" />
     <Content Include="viewArticle.aspx" />
     <Content Include="zadani_clanku.aspx" />
@@ -333,6 +334,13 @@
     </Compile>
     <Compile Include="reviewV2.aspx.designer.cs">
       <DependentUpon>reviewV2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sefredaktor_prehled.aspx.cs">
+      <DependentUpon>sefredaktor_prehled.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sefredaktor_prehled.aspx.designer.cs">
+      <DependentUpon>sefredaktor_prehled.aspx</DependentUpon>
     </Compile>
     <Compile Include="show_article.aspx.cs">
       <DependentUpon>show_article.aspx</DependentUpon>

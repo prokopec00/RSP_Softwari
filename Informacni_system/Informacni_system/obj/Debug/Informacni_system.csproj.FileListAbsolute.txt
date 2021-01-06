@@ -267,7 +267,6 @@ C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Inform
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\bin\System.Numerics.Vectors.xml
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csprojAssemblyReference.cache
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.Properties.Resources.resources
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.csproj.GenerateResource.cache
 C:\Users\prokopec.simon\Desktop\škola\RSP\RSP_Softwari\Informacni_system\Informacni_system\obj\Debug\Informacni_system.dll.licenses

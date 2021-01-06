@@ -8,6 +8,9 @@
     <asp:Label ID="testLb" runat="server"></asp:Label>
     <div class="container">
         <h1 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Recenze článků</h1>
+        <a class="helpSign float-right" href="#">
+            <i class="fa fa-question-circle" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Na této stránce můžou recenzenti recenzovat přiřazené články a zobrazovat si svoji historii recenzí."></i>
+        </a>
         <h2 class="text-center" style="margin-top: 10px; margin-bottom: 7px;">Články čekající na recenzi</h2>
         <asp:GridView ID="recenzeGridView" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
         table-bordered table-hover"
@@ -241,13 +244,13 @@
 
     </div>
     <script>
-        function showRecenzniForm() {
-            $('#recenzniForm').modal('show');
-        }
+      function showRecenzniForm() {
+        $('#recenzniForm').modal('show');
+      }
 
-        function showRecenzniDoneForm() {
-            $('#recenzniDoneForm').modal('show');
-        }
+      function showRecenzniDoneForm() {
+        $('#recenzniDoneForm').modal('show');
+      }
     </script>
 </asp:Content>
 

@@ -177,6 +177,18 @@ namespace Informacni_system
         horizontalMenu.DataSource = menuForRole;
         horizontalMenu.DataBind();
       }
+      else if (ID_role == 4) //menu pro sefredaktora
+      {
+        DataRow row = menuForRole.NewRow();
+        row["menuTarget"] = "sefredaktor_prehled.aspx";
+        row["text"] = "Přehled událostí";
+
+        menuForRole.Rows.Add(row);
+
+
+        horizontalMenu.DataSource = menuForRole;
+        horizontalMenu.DataBind();
+      }
       else if (ID_role == 5) //menu pro administratora
       {
         DataRow row = menuForRole.NewRow();

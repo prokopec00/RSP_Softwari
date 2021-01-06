@@ -11,6 +11,7 @@
   <script src="Scripts/jquery-3.0.0.min.js"></script>
 
   <script src="Scripts/bootstrap.min.js"></script>
+  <script src="Scripts/bs-init.js"></script>
 
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,9 +43,9 @@
       
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
               <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">Historie časopisu</a>
-                <a href="#" class="dropdown-item">Redakční rada</a>
-                <a href="#" class="dropdown-item">Kontakty</a>
+                <a href="#" class="dropdown-item dropDownLink">Historie časopisu</a>
+                <a href="#" class="dropdown-item dropDownLink">Redakční rada</a>
+                <a href="#" class="dropdown-item dropDownLink">Kontakty</a>
 
               </div>
             </div>
@@ -245,6 +246,15 @@
         $(function () {
           $("[rel='tooltip']").tooltip();
         });
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $(document).ready(function () {
+          $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        });
+
       </script>
 
       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
