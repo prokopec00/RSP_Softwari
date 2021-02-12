@@ -61,12 +61,12 @@ namespace Informacni_system
     {
       //MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
       //conn_string.Server = "db4free.net";
+      //conn_string.Password = "klobou01";
       //conn_string.UserID = "rsp_prokopec";
-      //conn_string.Password = "freeacc123";
       //conn_string.Database = "rsp_prokopec";
       //conn_string.Port = 3306;
 
-      SqlConnection conn = new SqlConnection("Data Source=SQL5053.site4now.net;Initial Catalog=DB_A6B685_prokopec;User Id=DB_A6B685_prokopec_admin;Password=freeacc123");
+      SqlConnection conn = new SqlConnection("Data Source=sql5102.site4now.net;Initial Catalog=DB_A6F378_klobou01;User Id=DB_A6F378_klobou01_admin;Password=klobou01");
       conn.Open();
 
 
@@ -80,11 +80,11 @@ namespace Informacni_system
       //MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
       //conn_string.Server = "db4free.net";
       //conn_string.UserID = "rsp_prokopec";
-      //conn_string.Password = "freeacc123";
+      //conn_string.Password = "klobou01";
       //conn_string.Database = "rsp_prokopec";
       //conn_string.Port = 3306;
 
-      SqlConnection conn = new SqlConnection("Data Source=SQL5053.site4now.net;Initial Catalog=DB_A6B685_prokopec;User Id=DB_A6B685_prokopec_admin;Password=freeacc123");
+      SqlConnection conn = new SqlConnection("Data Source=sql5102.site4now.net;Initial Catalog=DB_A6F378_klobou01;User Id=DB_A6F378_klobou01_admin;Password=klobou01");
       conn.Open();
       SqlCommand sqlCommand = new SqlCommand(sql, conn);
       SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
@@ -177,7 +177,24 @@ namespace Informacni_system
         horizontalMenu.DataSource = menuForRole;
         horizontalMenu.DataBind();
       }
-      else if (ID_role == 4) //menu pro sefredaktora
+            //redaktor deadline kalendar
+            else if (ID_role == 3) 
+            {
+                DataRow row = menuForRole.NewRow();
+                row["menuTarget"] = "redaktor_kalendar.aspx";
+                row["text"] = "deadline kalendář";
+
+                menuForRole.Rows.Add(row);
+
+
+                horizontalMenu.DataSource = menuForRole;
+                horizontalMenu.DataBind();
+            }
+            //redaktor deadline kalendar
+
+
+
+            else if (ID_role == 4) //menu pro sefredaktora
       {
         DataRow row = menuForRole.NewRow();
         row["menuTarget"] = "sefredaktor_prehled.aspx";

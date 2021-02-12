@@ -43,9 +43,9 @@
       
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">O nás</a>
               <div class="dropdown-menu">
-                <a href="#" class="dropdown-item dropDownLink">Historie časopisu</a>
-                <a href="#" class="dropdown-item dropDownLink">Redakční rada</a>
-                <a href="#" class="dropdown-item dropDownLink">Kontakty</a>
+                <a href="about.aspx" class="dropdown-item dropDownLink">Historie časopisu</a>
+               <%-- <a href="#" class="dropdown-item dropDownLink">Redakční rada</a>
+                <a href="#" class="dropdown-item dropDownLink">Kontakty</a>--%>
 
               </div>
             </div>

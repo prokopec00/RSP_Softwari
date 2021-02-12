@@ -145,7 +145,9 @@
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="HelpDesk.aspx" />
+    <Content Include="about.aspx" />
     <Content Include="profil.aspx" />
+    <Content Include="redaktor_kalendar.aspx" />
     <Content Include="reviewV2.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -308,6 +310,13 @@
     <Compile Include="HelpDesk.aspx.designer.cs">
       <DependentUpon>HelpDesk.aspx</DependentUpon>
     </Compile>
+    <Compile Include="about.aspx.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="about.aspx.designer.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+    </Compile>
     <Compile Include="profil.aspx.cs">
       <DependentUpon>profil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -327,6 +336,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="redaktor_kalendar.aspx.cs">
+      <DependentUpon>redaktor_kalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="redaktor_kalendar.aspx.designer.cs">
+      <DependentUpon>redaktor_kalendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="reviewV2.aspx.cs">
       <DependentUpon>reviewV2.aspx</DependentUpon>

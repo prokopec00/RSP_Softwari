@@ -89,23 +89,39 @@ namespace Informacni_system
 
     }
 
-    //protected void Button1_Click1(object sender, EventArgs e)
-    //{
-    //  for (int i = 0; i < GridView1.Rows.Count; i++)
-    //  {
-    //    CheckBox ch = (CheckBox)GridView1.Rows[i].FindControl("theCheckBox");
-    //    Label lb = (Label)GridView1.Rows[i].FindControl("Label4");
-    //    if (ch.Checked == true)
-    //    {
-    //      string sourceFile = Server.MapPath("~/Uploads/" + lb.Text);
-    //      string destinationFolder = Server.MapPath("~/Aproved/" + lb.Text);
-    //      System.IO.File.Move(sourceFile, destinationFolder);
-    //    }
-    //  }
-    //  Response.Redirect("~/show_article.aspx");
-    //}
+        //protected void Button1_Click1(object sender, EventArgs e)
+        //{
+        //  for (int i = 0; i < GridView1.Rows.Count; i++)
+        //  {
+        //    CheckBox ch = (CheckBox)GridView1.Rows[i].FindControl("theCheckBox");
+        //    Label lb = (Label)GridView1.Rows[i].FindControl("Label4");
+        //    if (ch.Checked == true)
+        //    {
+        //      string sourceFile = Server.MapPath("~/Uploads/" + lb.Text);
+        //      string destinationFolder = Server.MapPath("~/Aproved/" + lb.Text);
+        //      System.IO.File.Move(sourceFile, destinationFolder);
+        //    }
+        //  }
+        //  Response.Redirect("~/show_article.aspx");
+        //}
+        protected void button_ver1_Click(object sender, EventArgs e)
+        {
 
-    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+            //btn open funkce asi stahnuti oznaceneho article
+            var button = (System.Web.UI.WebControls.Button)sender;
+            string FilePath = button.Attributes["Value"];
+            String FileBuffer = ("~/Aproved/" + FilePath);
+            if (FileBuffer != null)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-length", FileBuffer.Length.ToString());
+                Response.WriteFile(FileBuffer);
+            }
+        }
+
+
+
+        protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
     {
 
 
@@ -152,8 +168,13 @@ namespace Informacni_system
       int stateClanku = (int)article[4];
       string nazevClanku = article[1].ToString();
       string autorClanku = article[2].ToString();
+            //klob jmena verzi
+      string jmenoSouboru = article[3].ToString();
+      string jmenoSouboru_ver2 = article[7].ToString();
+      string klobIdArticle = article[0].ToString();
+      
 
-      string magazineID = articles.Rows[0]["magazine"].ToString();
+            string magazineID = articles.Rows[0]["magazine"].ToString();
       DataTable magazineFromID = new DataTable();
       gt.DB_ExecuteTable("SELECT name FROM tbl_magazine WHERE id_magazine=" + magazineID, magazineFromID);
 
@@ -162,7 +183,13 @@ namespace Informacni_system
       nazevClankuLb.Text = "Název článku: " + nazevClanku;
       authorClankuLb.Text = "Autor článku: " + autorClanku;
       magazinClankuLb.Text = "Číslo magazínu: " + magazineName;
-      stateChanger(stateClanku);
+            //klob jmena verzi
+      Button1.Attributes["Value"] = jmenoSouboru;
+      Button2.Attributes["Value"] = jmenoSouboru_ver2;
+      Button3.Attributes["Value"] = klobIdArticle;
+      
+
+            stateChanger(stateClanku);
 
       if (stateClanku != 1 || !Session["role"].ToString().Equals("3"))
       {
@@ -192,10 +219,37 @@ namespace Informacni_system
         ddlRecenzenti2.DataBind();
 
       }
+            //todo jen pro autora clanku
+
+      //klob session vypis
+            DataTable users = new DataTable();
+
+            string iduser;
+            
+            iduser = Session["username"].ToString();
+            // gt.DB_ExecuteTable("SELECT * FROM tbl_user WHERE username='" + usernameTB.Text + "'", users);
+            //DataRow user = users.Rows[0];
+            //Session["userID"] = user[0].ToString();
+            //Session["username"] = user[1].ToString();
+            //Session["name"] = user[2].ToString();
+            //Session["surname"] = user[3].ToString();
+            //Session["email"] = user[4].ToString();
+            //Session["role"] = user[5].ToString();
+
+            if (stateClanku == 5 && iduser == autorClanku)
+            {
+                Button3.Visible = true;
+                FileUpload1.Visible = true;
+                //todo autor vidi recenze
+                recenzeDiv1.Visible = true;
+                recenzeDiv2.Visible = true;
+
+            }
 
 
 
-      if (stateClanku < 4)
+
+            if (stateClanku < 4)
       {
 
         return;
@@ -211,7 +265,12 @@ namespace Informacni_system
         IdReviewer2 = Convert.ToInt32(reviewList[2]);
         ratingRecenzent1.Text = "Recenzent: " + getUser(IdReviewer1);
         ratingRecenzent2.Text = "Recenzent: " + getUser(IdReviewer2);
-      }
+                //klob id review
+               int IdReview01 = Convert.ToInt32(reviewList[4]);
+                int IdReview02 = Convert.ToInt32(reviewList[5]);
+                Button4.Attributes["Value"] = ""+IdReview01+"";
+                Button5.Attributes["Value"] = "" + IdReview02 + "";
+            }
       catch
       {
         //jeste nebyli urceni recenzenti -> ukoncit funkci
@@ -294,9 +353,24 @@ namespace Informacni_system
         ratingText1.Text = review1[5].ToString();
 
         stavPosudek1.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+                //klob
+                // global_template gt = new global_template();
+                // DataTable articles = new DataTable();
+                //natazeni clanku
+                //gt.DB_ExecuteTable("SELECT * FROM tbl_article WHERE id_article='" + idArticle + "'", articles);
+                //DataRow article = articles.Rows[0];
+
+                // string autorClanku = article[2].ToString();
 
 
-        if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")))
+                //klob
+                string iduser;
+
+                iduser = Session["username"].ToString();
+                //klob
+
+
+                if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")) || iduser == username)
         {
           recenzeDiv1.Visible = true;
         }
@@ -311,7 +385,7 @@ namespace Informacni_system
         recenzeDiv1.Visible = false;
         stavPosudek1.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
       }
-
+      ///REVIEW
       if (rev2 != -1)
       {
         DataTable reviewTable2 = new DataTable();
@@ -327,7 +401,15 @@ namespace Informacni_system
 
         stavPosudek2.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
 
-        if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")))
+
+                //klob
+                string iduser;
+
+                iduser = Session["username"].ToString();
+                //klob
+
+
+                if (int.Parse(Session["role"].ToString()) >= 3 || (Session["username"].ToString().Equals(username) && temporary2.Rows[0]["author_allowed"].ToString().Equals("True")) || iduser == username)
         {
           recenzeDiv2.Visible = true;
         }
@@ -402,28 +484,51 @@ namespace Informacni_system
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
+                    //klob
+                    
+                    recenzeDiv1.Visible = true;
+                    recenzeDiv2.Visible = true;
+                    stavZverejnen.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+                   
+                    
+                    //todo if ver2 not null
+                    
+
+                    global_template gt = new global_template();
+
+                    int articleID = int.Parse(hfArticleID.Value);
+                    DataTable temporary = new DataTable();
+
+                    gt.DB_ExecuteTable("SELECT * FROM tbl_article WHERE id_article=" + articleID, temporary);
+
+                    string ver2 = temporary.Rows[0]["filename_ver2"].ToString();
+                    if (ver2 != "0")
+                        stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+                    //ver2 = "1";
+
+                    //todo if ver2 not null
+                    //klob
+                    stavKonec.Text = "<i class=\"fa fa-times-circle fauncheck\"></i>";
           break;
         case 6:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Přijato";
           break;
         case 7:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Přijato s výhradami";
           break;
         case 8:
           stavNovePodany.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavStanoveniRec.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavRecenze.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
-          //stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
+          stavUpravaAutor.Text = "<i class=\"fa fa-check-circle facheck\"></i>";
           stavKonec.Text = "Zamítnuto";
           break;
       }
@@ -504,10 +609,20 @@ namespace Informacni_system
 
 
       detailInit(id);
-
+            
       pnlArticleOverview.Visible = false;
       pnlArticleDetail.Visible = true;
 
+
+            if (Session["role"].ToString()=="3")
+            {
+                aceptArt.Visible = true;
+                rejectArt.Visible = true;
+            }
+                //    string xxx;
+            //aceptArt.Attributes["Value"] = Session["role"].ToString();
+                
+                    
     }
 
     protected void btnDelete_Click(object sender, EventArgs e)
@@ -648,7 +763,142 @@ namespace Informacni_system
     {
 
     }
-  }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            var button = (System.Web.UI.WebControls.Button)sender;
+            string FilePath = button.Attributes["Value"];
+            String FileBuffer = ("~/Aproved/" + FilePath);
+            if (FileBuffer != null)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-length", FileBuffer.Length.ToString());
+                Response.WriteFile(FileBuffer);
+            }
+        }
+
+        protected void Button2_Click1(object sender, EventArgs e)
+        {
+            var button = (System.Web.UI.WebControls.Button)sender;
+            string FilePath = button.Attributes["Value"];
+            String FileBuffer = ("~/Aproved/" + FilePath);
 
 
-}
+            if (FilePath == "0")
+                Button2.Text = "verze 2 neni dostupna";
+
+            if (FilePath != "0")
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-length", FileBuffer.Length.ToString());
+                Response.WriteFile(FileBuffer);
+            }
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            DataTable tbl = new DataTable();///maybe not
+            DataTable query = new DataTable();
+            global_template gt = new global_template();
+
+            string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+            //error hlasky
+            //if (clanekJmeno.Text == "")
+            //{
+            //    Response.Write("<script>alert('Vyplňte název článku.');</script>");
+
+            //}
+            //else
+            //{
+            //    if (autorJmeno.Text == "")
+            //    {
+            //        Response.Write("<script>alert('Vyplňte jméno uživatele.');</script>");
+
+            //    }
+                //else
+                //{
+                    try
+                    {
+                //error hlasky
+
+                //prirazeni k magazinu
+                //int id_magazine = tbl.Rows[0].Field<int>(magazinList.SelectedIndex);
+                string idart = Button3.Attributes["Value"];
+                //insert into db
+                //string task1 = "Insert into tbl_article(name_article,name_author,filename,magazine) values('" + clanekJmeno.Text + "','" + autorJmeno.Text + "','" + fileName + "','" + id_magazine + "')";
+                //update db
+                string task1 = "UPDATE tbl_article SET filename_ver2 = '" + fileName + "' WHERE tbl_article.id_article = '" + idart + "'";
+                        gt.DB_ExecuteNonQuery(task1);
+
+                        //upload file
+                        FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Aproved/") + fileName);
+                        Response.Redirect(Request.Url.AbsoluteUri);
+
+                //show download button
+                Button2.Visible = true;
+            }
+                    catch (System.IO.IOException)
+                    {
+                        Response.Write("<script>alert('Vyberte soubor.');</script>");
+                    }
+                //}
+            }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            //odvolat se na posudek 1
+            //todo tbl_review2 update review_validity to 0
+            DataTable query = new DataTable();
+            global_template gt = new global_template();
+            string idrev1 = Button4.Attributes["Value"];
+            
+            string task1 = "UPDATE tbl_review2 SET review_validity = '0' FROM tbl_review2 AS Table_A INNER JOIN tbl_review_list AS Table_B ON Table_A.id_review = Table_B.id_review1 WHERE id_review1 = '" + idrev1 + "'";
+            gt.DB_ExecuteNonQuery(task1);
+
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            //odvolat se na posudek 2
+            //todo tbl_review2 update review_validity to 0
+            DataTable query = new DataTable();
+            global_template gt = new global_template();
+            string idrev2 = Button5.Attributes["Value"];
+
+            string task1 = "UPDATE tbl_review2 SET review_validity = '0' FROM tbl_review2 AS Table_A INNER JOIN tbl_review_list AS Table_B ON Table_A.id_review = Table_B.id_review1 WHERE id_review1 = '" + idrev2 + "'";
+            gt.DB_ExecuteNonQuery(task1);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //update table add ver2
+        //string ver2;
+
+        //DataTable query = new DataTable();
+        //global_template gt = new global_template();
+        ////UPDATE `tbl_article` SET `filename_ver2` = 'bagr' WHERE `tbl_article`.`id_article` = 1; 
+        //gt.DB_ExecuteTable("UPDATE `tbl_article` SET `filename_ver2` = `" + ver2+ "` WHERE `tbl_article`.`id_article` = 1", query);
+    }
+    }
+
+

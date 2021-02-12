@@ -45,7 +45,7 @@
   </tr>
 </tbody>
 </table>
-        <asp:Button ID="uploadBtn" runat="server" Text="Nahrá ke kontrole" OnClick="uploadBtn_Click" />
+        <asp:Button ID="uploadBtn" runat="server" Text="Nahrát ke kontrole" OnClick="uploadBtn_Click" />
         <br />
 <div style="margin-top:5%;">
     <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" EmptyDataText = "No files uploaded" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnDataBound="GridView1_DataBound">

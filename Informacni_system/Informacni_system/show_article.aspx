@@ -1,6 +1,65 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/global_template.Master" AutoEventWireup="true" CodeBehind="show_article.aspx.cs" Inherits="Informacni_system.show_article" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            height: 33px;
+        }
+        .auto-style2 {
+            text-align: right;
+            height: 33px;
+        }
+        .auto-style3 {
+            height: 27px;
+        }
+        .auto-style4 {
+            text-align: center;
+            height: 27px;
+        }
+        .auto-style5 {
+            height: 29px;
+        }
+        .auto-style6 {
+            text-align: right;
+            height: 29px;
+        }
+        .auto-style7 {
+            text-align: right;
+            height: 27px;
+        }
+        .auto-style8 {
+            position: relative;
+            width: 50%;
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-width: 100%;
+            top: 4px;
+            left: 14px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .auto-style9 {
+            width: 60%;
+            color: #212529;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        .auto-style10 {
+            position: relative;
+            width: 59%;
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-width: 100%;
+            top: 7px;
+            left: -95px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -62,10 +121,10 @@
             </div>
         </div>--%>
     <div>
-      <asp:GridView ID="gv_ArticleOverview" runat="server" AutoGenerateColumns="False" Style="width: 70%; border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
+      <asp:GridView ID="gv_ArticleOverview" runat="server" AutoGenerateColumns="False" Style="border-radius: 15px; margin-top: 3%; font-size: medium;" CssClass="table  
             table-bordered table-hover"
         HorizontalAlign="Center"
-        AllowSorting="True" GridLines="Horizontal" BackColor="White" OnDataBound="gv_ArticleOverview_DataBound" OnSelectedIndexChanged="gv_ArticleOverview_SelectedIndexChanged">
+        AllowSorting="True" GridLines="Horizontal" BackColor="White" OnDataBound="gv_ArticleOverview_DataBound" OnSelectedIndexChanged="gv_ArticleOverview_SelectedIndexChanged" Height="336px" Width="943px">
 
 
         <Columns>
@@ -132,6 +191,7 @@
                   </asp:TemplateField>--%>
             <asp:TemplateField ItemStyle-CssClass="detail" ControlStyle-CssClass="btn btn-block" FooterStyle-BackColor="White" FooterStyle-BorderStyle="Solid" ControlStyle-BackColor="White">
             <ItemTemplate>
+               <%-- retarded--%>
               <asp:Button runat="server" ID="btnOpen" CssClass="btn btn-default" Style="width: 100%" Value='<%#Eval("filename")%>' OnClick="btnOpen_Click" Text="Otevřít" />
             </ItemTemplate>
                 <ItemStyle CssClass="detail" />
@@ -216,8 +276,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Posudek 2 doručen redakci</td>
-                  <td class="text-center">
+                  <td class="auto-style3">Posudek 2 doručen redakci</td>
+                  <td class="auto-style4">
                     <asp:Label runat="server" ID="stavPosudek2" Text='<i class="fa fa-times-circle fauncheck"></i>'></asp:Label>
                   </td>
                 </tr>
@@ -227,12 +287,15 @@
                     <asp:Label runat="server" ID="stavZverejnen" Text='<i class="fa fa-times-circle fauncheck"></i>'></asp:Label>
                   </td>
                 </tr>
-    <%--            <tr>
+
+                  <%--klob--%>
+                <tr>
                   <td>Probíhá úprava textu autorem</td>
                   <td class="text-center">
                     <asp:Label runat="server" ID="stavUpravaAutor" Text='<i class="fa fa-times-circle fauncheck"></i>'></asp:Label>
                   </td>
-                </tr>--%>
+                </tr>
+                 <%-- klob--%>
                 <tr>
                   <td>Příspěvek je přijat k vydání nebo zamítnut</td>
                   <td class="text-center">
@@ -248,28 +311,34 @@
           <div class="row">
             <div class="col">
               <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Verze</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Verze 1</td>
-                      <td class="text-right">
-                        <button class="btn btn-primary btn-sm text-white loginModalBtn" style="width: 50%;" type="button">Otevřít</button></td>
-                    </tr>
-                    <tr>
-                      <td>Verze 2</td>
-                      <td class="text-right">
-                        <button class="btn btn-primary btn-sm text-white loginModalBtn" style="width: 50%;" type="button">Otevřít</button></td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
+              <table class="auto-style9">
+                  <thead>
+                      <tr>
+                          <th>Verze</th>
+                          <th>&nbsp;</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td class="auto-style1">Verze 1 - originál</td>
+                          <td class="auto-style2">
+                              <asp:Button ID="Button1" runat="server" CssClass="btn btn-default" OnClick="Button1_Click1" Style="width: 100%" Text="Stáhnout originál" BorderColor="Black" BorderStyle="Double" />
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Verze 2 - upravená po shlédnutí kritiky</td>
+                          <td class="text-right">
+                              <asp:Button ID="Button2" runat="server" CssClass="btn btn-default" OnClick="Button2_Click1" Style="width: 100%" Text="Stáhnout verzi po úpravách" BorderColor="Black" BorderStyle="Double" />
+                              <br />
+                              <br />
+                              <asp:FileUpload ID="FileUpload1" runat="server" accept=" .pdf" Visible="False" Width="100%" />
+                              <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Uplouadnout 2. verzi" Visible="False" />
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
           </div>
         </div>
       </div>
@@ -328,7 +397,7 @@
       <%-- Radek s recenzemi --%>
       <div class="row" style="margin-top: 20px;">
         <%-- 1. recenze --%>
-        <div class="col" id="recenzeDiv1" runat="server">
+        <div class="auto-style8" id="recenzeDiv1" runat="server">
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -361,9 +430,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Jazyková a stylistická úroveň<br>
+                  <td class="auto-style3">Jazyková a stylistická úroveň<br>
                   </td>
-                  <td class="text-right">
+                  <td class="auto-style7">
                     <asp:Label ID="ratingLanguage1" runat="server"></asp:Label>
                   </td>
                 </tr>
@@ -376,6 +445,7 @@
                 <tr>
                   <td colspan="2">
                     <asp:Label ID="ratingRecenzent1" runat="server"></asp:Label>
+                      <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Odvolat se k podanemu posudku" />
                     <br>
                   </td>
                 </tr>
@@ -384,13 +454,13 @@
           </div>
         </div>
         <%-- 2. recenze --%>
-        <div class="col" id="recenzeDiv2" runat="server">
+        <div class="auto-style10" id="recenzeDiv2" runat="server">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Recenze 2</th>
-                  <th class="text-right">Hodnocení</th>
+                  <th class="auto-style5">Recenze 2</th>
+                  <th class="auto-style6">Hodnocení</th>
                 </tr>
               </thead>
               <tbody>
@@ -417,9 +487,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Jazyková a stylistická úroveň<br>
+                  <td class="auto-style3">Jazyková a stylistická úroveň<br>
                   </td>
-                  <td class="text-right">
+                  <td class="auto-style7">
                     <asp:Label ID="ratingLanguage2" runat="server"></asp:Label>
                   </td>
                 </tr>
@@ -432,6 +502,7 @@
                 <tr>
                   <td colspan="2">
                     <asp:Label ID="ratingRecenzent2" runat="server"></asp:Label>
+                      <asp:Button ID="Button5" runat="server" Text="Odvolat se k podanemu posudku" />
                     <br>
                   </td>
                 </tr>
@@ -452,14 +523,14 @@
         <div class="col" style="margin-bottom: 20px;">
           <%--<button class="btn btn-primary confirmBtn" type="button">Schválit článek <i class="fa fa-check-circle-o"></i></button>--%>
           <%--<asp:Button ID="aceptArticle" CssClass="btn btn-primary confirmBtn" Text='Schválit článek <i class="fa fa-check-circle-o"></i>' runat="server"/>--%>
-          <asp:LinkButton runat="server" ID="aceptArt" CssClass="btn btn-primary confirmBtn" OnClick="aceptArt_Click">
+          <asp:LinkButton runat="server" ID="aceptArt" CssClass="btn btn-primary confirmBtn" OnClick="aceptArt_Click" Visible="False">
                     Schválit článek <i class="fa fa-check-circle-o"></i>
                 </asp:LinkButton>
         </div>
         <div class="col" style="margin-bottom: 20px;">
           <%--<button class="btn btn-primary loginModalBtn" type="button">Zamítnout článek <i class="fa fa-times-circle-o"></i></button>--%>
           <%--<asp:Button ID="rejectArticle" CssClass="btn btn-primary loginModalBtn" Text='Zamítnout článek <i class="fa fa-times-circle-o"></i>' runat="server"/>--%>
-          <asp:LinkButton runat="server" ID="rejectArt" CssClass="btn btn-primary loginModalBtn" OnClick="rejectArt_Click">
+          <asp:LinkButton runat="server" ID="rejectArt" CssClass="btn btn-primary loginModalBtn" OnClick="rejectArt_Click" Visible="False">
                     Zamítnout článek <i class="fa fa-times-circle-o"></i>
                 </asp:LinkButton>
         </div>

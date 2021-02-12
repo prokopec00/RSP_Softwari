@@ -23,6 +23,7 @@ namespace Informacni_system
       {
         autorInit();
         redaktorInit();
+        recenzevalidInit();
         recenzeInit();
       }
     }
@@ -37,7 +38,10 @@ namespace Informacni_system
       autorPrehledGV.DataSource = complete;
       autorPrehledGV.DataBind();
 
-    }
+            //klob
+            //autorPrehledGV0.DataSource = complete;
+            //autorPrehledGV0.DataBind();
+        }
 
     protected void redaktorInit()
     {
@@ -51,7 +55,41 @@ namespace Informacni_system
 
     }
 
-    protected void recenzeInit()
+        //klob
+        protected void recenzevalidInit()
+        {
+            global_template gT = new global_template();
+            DataTable complete = new DataTable();
+
+            //gT.DB_ExecuteTable("SELECT a.name_article, c.username, d.review_validity " +
+            //    "FROM tbl_article AS a " +
+            //    "INNER JOIN tbl_review_list AS b ON a.id_article = b.id_article " +
+            //    "INNER JOIN tbl_user AS c ON b.id_reviewer1 = c.id_user" +
+            //    "INNER JOIN tbl_review2 AS d ON b.id_review1 = d.id_review OR b.id_review2 = d.id_review" +
+            //    "WHERE d.review_validity = 0" +
+            //    "", complete);
+            gT.DB_ExecuteTable("SELECT a.name_article,a.ID_article, a.name_author, d.username, c.id_review FROM tbl_article a " +
+                "JOIN tbl_review_list b ON a.id_article = b.id_article " +
+                "JOIN tbl_review2 c ON b.id_review1 = c.id_review " +
+                "JOIN tbl_user d ON b.id_reviewer1 = d.id_user " +
+                "WHERE c.review_validity = 0 " +
+                "ORDER BY a.ID_article DESC", complete);
+
+            //gT.DB_ExecuteTable("SELECT a.name_article, c.username " +
+            //   "FROM tbl_article a " +
+            //   "LEFT OUTER JOIN tbl_review_list b ON a.id_article = b.id_article " +
+            //   "LEFT OUTER JOIN tbl_user c ON b.id_reviewer1 = c.id_user" +
+            //   "" +
+            //   "WHERE a.name_article <> Logo" +
+            //   "ORDER BY c.username DESC", complete);
+
+
+            autorPrehledGV0.DataSource = complete;
+            autorPrehledGV0.DataBind();
+
+        }
+
+        protected void recenzeInit()
     {
       global_template gT = new global_template();
       DataTable rev1 = new DataTable();
@@ -68,7 +106,7 @@ namespace Informacni_system
 
       rev1.Merge(rev2);
       rev3.Merge(rev4);
-
+            //todo opravit chybu mozna
       recenzePrehledGV.DataSource = rev1;
       recenzePrehledGV2.DataSource = rev2;
 
@@ -76,5 +114,11 @@ namespace Informacni_system
       recenzePrehledGV.DataBind();
     }
 
-  }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //select article id=textbox 
+            //state to 2 reassign reviewers
+
+        }
+    }
 }

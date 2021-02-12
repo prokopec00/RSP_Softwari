@@ -163,7 +163,7 @@ namespace Informacni_system
 
             //vlozeni recenze do reviewListu
             DataTable reviewList = new DataTable();
-            gt.DB_ExecuteTable("SELECT id_reviewer1, id_reviewer2, id_review1, id_review2 FROM tbl_review_list WHERE id_review_list = " + hiddenIDlist.Value, reviewList);
+            gt.DB_ExecuteTable("SELECT id_reviewer1, id_reviewer2, id_review1, id_review2, id_article FROM tbl_review_list WHERE id_review_list = " + hiddenIDlist.Value, reviewList);
             DataRow rowReviewList = reviewList.Rows[0];
             if (rowReviewList[0].ToString() == Session["userID"].ToString())
             {
@@ -174,9 +174,11 @@ namespace Informacni_system
             {
                 //vlozit id recenze do id_review2
                 gt.DB_ExecuteNonQuery("UPDATE tbl_review_list SET id_review2= " + idReview + " WHERE id_review_list = " + hiddenIDlist.Value);
+                gt.DB_ExecuteNonQuery("UPDATE tbl_article SET state= " + 5 + " WHERE id_article = " +  Convert.ToInt32(rowReviewList[4]));
             }
 
             reviewDataBind();
+            
         }
     }
 }
